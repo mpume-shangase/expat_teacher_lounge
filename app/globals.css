@@ -2,26 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --brand-blue: 202 76% 40%;
+    --brand-deep: 239 67% 48%;
+    --brand-gold: 43 97% 38%;
+  }
+  .dark {
+    --brand-blue: 202 76% 48%;
+    --brand-deep: 239 67% 54%;
+    --brand-gold: 43 97% 65%;
+  }
+  body {
+    @apply bg-[#ffffff] text-[#0a0a14] dark:bg-[#0a0b14] dark:text-[#f0f0f0] font-body antialiased transition-colors duration-300;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight text-[#0a0a14] dark:text-[#f0f0f0];
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-blue to-brand-gold;
 }
