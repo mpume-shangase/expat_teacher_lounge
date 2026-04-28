@@ -13,13 +13,32 @@ export default function PricingClient({ monthlyPriceId, annualPriceId }: Pricing
 
   const handleSubscribe = async (priceId: string, planName: string) => {
     setLoading(planName);
-    const response = await fetch('/api/create-checkout-session', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ priceId }),
-    });
-    const { url } = await response.json();
-    window.location.href = url;
+    try {
+      const response = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ priceId }),
+      });
+
+      if (response.status === 401) {
+        // Not logged in — send to login then back to pricing
+        window.location.href = '/login?redirect=/pricing';
+        return;
+      }
+
+      const data = await response.json();
+
+      if (!data.url) {
+        alert('Something went wrong. Please try again.');
+        setLoading(null);
+        return;
+      }
+
+      window.location.href = data.url;
+    } catch (err) {
+      alert('Something went wrong. Please try again.');
+      setLoading(null);
+    }
   };
 
   return (
