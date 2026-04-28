@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, Suspense } from 'react';
 import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import { motion, AnimatePresence } from 'framer-motion';
 
-export default function LoginPage() {
+function LoginPageInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirectTo = searchParams.get('redirect') || '/dashboard';
@@ -215,4 +215,12 @@ export default function LoginPage() {
 
     </div>
   );
+}
+
+export default function LoginPage() {
+    return (
+          <Suspense fallback={null}>
+                  <LoginPageInner />
+          </Suspense>Suspense>
+        );
 }
