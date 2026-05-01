@@ -17,46 +17,39 @@ export async function middleware(request: NextRequest) {
         },
         set(name: string, value: string, options: any) {
           request.cookies.set({ name, value, ...options })
-          response = NextResponse.next({
-            request: { headers: request.headers },
-          })
+          response = NextResponse.next({ request: { headers: request.headers } })
           response.cookies.set({ name, value, ...options })
         },
         remove(name: string, options: any) {
           request.cookies.set({ name, value: '', ...options })
-          response = NextResponse.next({
-            request: { headers: request.headers },
-          })
+          response = NextResponse.next({ request: { headers: request.headers } })
           response.cookies.set({ name, value: '', ...options })
         },
       },
     }
   )
 
-  const { data: { session } } = await supabase.auth.getSession()
+  // getUser() validates the JWT with Supabase's server — getSession() does not
+  const { data: { user } } = await supabase.auth.getUser()
 
-  // Protect dashboard and hub routes
-  const protectedPaths = ['/dashboard', '/hub']
-  const isProtectedPath = protectedPaths.some(path =>
-    request.nextUrl.pathname.startsWith(path)
-  )
+  const { pathname } = request.nextUrl
+  const isProtected = pathname.startsWith('/dashboard') || pathname.startsWith('/hub')
 
-  if (isProtectedPath && !session) {
-    return NextResponse.redirect(new URL('/login', request.url))
+  if (isProtected && !user) {
+    const loginUrl = new URL('/login', request.url)
+    loginUrl.searchParams.set('redirect', pathname)
+    return NextResponse.redirect(loginUrl)
   }
 
-  // Protect premium hub content
-  if (request.nextUrl.pathname.startsWith('/hub')) {
-    if (session) {
-      const { data: profile } = await supabase
-        .from('profiles')
-        .select('role, subscription_status')
-        .eq('id', session.user.id)
-        .single()
+  if (pathname.startsWith('/hub') && user) {
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('role')
+      .eq('id', user.id)
+      .single()
 
-      if (!profile || profile.role === 'free') {
-        return NextResponse.redirect(new URL('/pricing', request.url))
-      }
+    if (!profile || profile.role !== 'premium') {
+      return NextResponse.redirect(new URL('/pricing', request.url))
     }
   }
 

@@ -9,11 +9,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 function LoginPageInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const redirectTo = searchParams.get('redirect') || '/dashboard';
-  const supabase = createClient();
-  const [isSignIn, setIsSignIn] = useState(true);
-  const [loading, setLoading] = useState(false);
-  const [errorMsg, setErrorMsg] = useState('');
+  const redirectTo = searchParams.get('redirect') || '/dashboard'
+  const authError = searchParams.get('error')
+  const supabase = createClient()
+  const [isSignIn, setIsSignIn] = useState(true)
+  const [loading, setLoading] = useState(false)
+  const [errorMsg, setErrorMsg] = useState(
+    authError === 'auth_failed' ? 'Sign-in failed. Please try again.' : ''
+  )
 
   // form states
   const [email, setEmail] = useState('');
@@ -57,13 +60,14 @@ function LoginPageInner() {
   };
 
   const handleGoogleAuth = async () => {
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || window.location.origin
     await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`
-      }
-    });
-  };
+        redirectTo: `${siteUrl}/auth/callback`,
+      },
+    })
+  }
 
   return (
     <div className="flex w-full min-h-screen bg-white dark:bg-[#0a0b14] overflow-hidden">
