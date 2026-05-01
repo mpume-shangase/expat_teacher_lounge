@@ -1,49 +1,67 @@
 -- ============================================================
 -- RLS HARDENING MIGRATION
--- Run this in Supabase SQL Editor (Dashboard → SQL Editor)
+-- In Supabase: SQL Editor → New Query → paste this entire file → Run
 -- ============================================================
 
--- 1. Tighten the profiles table constraints
--- Ensure subscription_status only holds known values
-alter table profiles
-  drop constraint if exists profiles_subscription_status_check;
+-- Enable RLS on every table (idempotent)
+alter table profiles      enable row level security;
+alter table user_progress enable row level security;
+alter table countries     enable row level security;
+alter table hub_sections  enable row level security;
+alter table hub_articles  enable row level security;
 
-alter table profiles
-  add constraint profiles_subscription_status_check
-  check (subscription_status in ('inactive', 'active', 'cancelled', 'past_due'));
+-- ── profiles ────────────────────────────────────────────────────────────────
 
--- 2. Drop any existing conflicting policies before recreating
-drop policy if exists "Users can view own profile"    on profiles;
-drop policy if exists "Users can update own profile"  on profiles;
-drop policy if exists "Users can insert own profile"  on profiles;
+drop policy if exists "Users can view own profile"   on profiles;
+drop policy if exists "Users can insert own profile" on profiles;
+drop policy if exists "Users can update own profile" on profiles;
 
--- 3. Profiles — strict per-user isolation
---    SELECT: only your own row
 create policy "Users can view own profile"
   on profiles for select
   using (auth.uid() = id);
 
---    INSERT: only your own row (mirrors the SECURITY DEFINER trigger but
---    adds belt-and-suspenders at the RLS layer)
+-- Trigger already handles INSERT, but be explicit at the RLS layer too
 create policy "Users can insert own profile"
   on profiles for insert
   with check (auth.uid() = id);
 
---    UPDATE: only your own row, AND you cannot promote yourself to admin/premium
---    (role and subscription changes must go through the service-role webhook)
+-- Users can update display fields only.
+-- role / subscription_status / stripe_customer_id are locked by a trigger below.
 create policy "Users can update own profile"
   on profiles for update
-  using (auth.uid() = id)
-  with check (
-    auth.uid() = id
-    and role = (select role from profiles where id = auth.uid())
-    and subscription_status = (select subscription_status from profiles where id = auth.uid())
-    and subscription_plan is not distinct from (select subscription_plan from profiles where id = auth.uid())
-  );
+  using (auth.uid() = id);
 
--- 4. user_progress — drop and recreate to be explicit
+-- Trigger: prevent any client from self-promoting role or subscription.
+-- auth.uid() is NULL when called by the service role (webhooks), so
+-- the Stripe webhook can still update role/subscription without restriction.
+create or replace function block_role_escalation()
+returns trigger
+language plpgsql
+security invoker
+as $$
+begin
+  if auth.uid() is not null then
+    if new.role               is distinct from old.role
+    or new.subscription_status is distinct from old.subscription_status
+    or new.subscription_plan   is distinct from old.subscription_plan
+    or new.stripe_customer_id  is distinct from old.stripe_customer_id then
+      raise exception 'Permission denied: cannot modify subscription or role fields directly.';
+    end if;
+  end if;
+  return new;
+end;
+$$;
+
+drop trigger if exists trg_block_role_escalation on profiles;
+create trigger trg_block_role_escalation
+  before update on profiles
+  for each row execute function block_role_escalation();
+
+-- ── user_progress ────────────────────────────────────────────────────────────
+
 drop policy if exists "Users can view own progress"   on user_progress;
 drop policy if exists "Users can insert own progress" on user_progress;
+drop policy if exists "Users can update own progress" on user_progress;
 drop policy if exists "Users can delete own progress" on user_progress;
 
 create policy "Users can view own progress"
@@ -63,11 +81,15 @@ create policy "Users can delete own progress"
   on user_progress for delete
   using (auth.uid() = user_id);
 
--- 5. Lock down hub content — anon reads are fine but no one can write
---    via the client (all writes happen through the service role)
+-- ── hub content (read-only for everyone; writes only via service role) ────────
+
 drop policy if exists "Anyone can view active countries"   on countries;
 drop policy if exists "Anyone can view hub sections"       on hub_sections;
 drop policy if exists "Anyone can view published articles" on hub_articles;
+-- Remove any leftover blanket-deny policies from a previous attempt
+drop policy if exists "No client writes on countries"    on countries;
+drop policy if exists "No client writes on hub_sections" on hub_sections;
+drop policy if exists "No client writes on hub_articles" on hub_articles;
 
 create policy "Anyone can view active countries"
   on countries for select
@@ -81,28 +103,11 @@ create policy "Anyone can view published articles"
   on hub_articles for select
   using (is_published = true);
 
--- Explicitly deny all writes from authenticated users on content tables
--- (service role bypasses RLS, so webhooks/admin still work)
-create policy "No client writes on countries"
-  on countries for all
-  using (false)
-  with check (false);
+-- ── subscription_status constraint ───────────────────────────────────────────
 
-create policy "No client writes on hub_sections"
-  on hub_sections for all
-  using (false)
-  with check (false);
+alter table profiles
+  drop constraint if exists profiles_subscription_status_check;
 
-create policy "No client writes on hub_articles"
-  on hub_articles for all
-  using (false)
-  with check (false);
-
--- ============================================================
--- Verify RLS is enabled on every table (idempotent)
--- ============================================================
-alter table profiles      enable row level security;
-alter table user_progress enable row level security;
-alter table countries     enable row level security;
-alter table hub_sections  enable row level security;
-alter table hub_articles  enable row level security;
+alter table profiles
+  add constraint profiles_subscription_status_check
+  check (subscription_status in ('inactive', 'active', 'cancelled', 'past_due'));
