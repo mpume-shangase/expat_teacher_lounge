@@ -6,17 +6,16 @@ import DashboardClient from './DashboardClient'
 
 export default async function DashboardPage({ searchParams }: { searchParams: { success?: string } }) {
   const supabase = createClient()
-  const { data: { session } } = await supabase.auth.getSession()
+  const { data: { user } } = await supabase.auth.getUser()
 
-  if (!session) {
+  if (!user) {
     redirect('/login')
   }
 
   const { data: profile } = await supabase
     .from('profiles')
     .select('*')
-    .eq('id', session.user.id)
-    .single()
+            .eq('id', user.id)
 
   const isPremium = profile?.role === 'premium'
   const showSuccessModal = searchParams.success === 'true'
