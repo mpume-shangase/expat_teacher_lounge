@@ -4,7 +4,7 @@ import HubDashboardClient from './HubDashboardClient'
 
 export default async function HubHomePage() {
   const supabase = createClient()
-  const { data: { session } } = await supabase.auth.getSession()
+    const { data: { user } } = await supabase.auth.getUser()
 
   // Fetch article counts for both countries
   const { data: qatarArticles } = await supabase
@@ -31,7 +31,7 @@ export default async function HubHomePage() {
     const { data: progress } = await supabase
       .from('user_progress')
       .select('article_id')
-      .eq('user_id', session.user.id)
+              .eq('user_id', user?.id)
       
     if (progress) {
       userCompleted = progress.length
