@@ -27,7 +27,7 @@ export default async function HubHomePage() {
   let qatarCompleted = 0
   let canadaCompleted = 0
 
-  if (session) {
+  if (user) {
     const { data: progress } = await supabase
       .from('user_progress')
       .select('article_id')
