@@ -16,6 +16,7 @@ export default async function DashboardPage({ searchParams }: { searchParams: { 
     .from('profiles')
     .select('*')
             .eq('id', user.id)
+              .single()
 
   const isPremium = profile?.role === 'premium'
   const showSuccessModal = searchParams.success === 'true'
