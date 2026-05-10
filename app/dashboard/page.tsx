@@ -21,8 +21,8 @@ export default async function DashboardPage({ searchParams }: { searchParams: { 
   const isPremium = profile?.role === 'premium'
   const showSuccessModal = searchParams.success === 'true'
 
-  const userInitials = profile?.full_name?.split(' ').map((n: string) => n[0]).join('').substring(0, 2) || 'ET'
-  const userName = profile?.full_name || 'Teacher'
+  const userInitials = (profile?.full_name || user.user_metadata?.full_name)?.split(' ').map((n: string) => n[0]).join('').substring(0, 2) || 'ET'
+  const userName = profile?.full_name || user.user_metadata?.full_name || 'Teacher'
   const subscriptionLabel = isPremium ? 'Premium Active' : 'Free Account'
   const userRole = profile?.role || 'free'
 
