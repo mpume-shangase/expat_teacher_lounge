@@ -59,10 +59,8 @@ export default function Navbar() {
   const isActive = (href: string) =>
          href === '/' ? pathname === '/' : pathname.startsWith(href)
 
-  const displayName = user?.user_metadata?.full_name
-      ? user.user_metadata.full_name.split(' ')[0]
-        : (user?.email?.split('@')[0] || '')
-
+  const rawName = user?.user_metadata?.full_name || user?.email || ''
+        const displayName = rawName.includes('@') ? rawName.split('@')[0] : rawName.split(' ')[0]
   return (
         <motion.nav
                 className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
