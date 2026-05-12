@@ -7,7 +7,7 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import ThemeToggle from './ThemeToggle'
 import { createClient } from '@/lib/supabase/client'
-import type { User } from '@supabase/supabase-js'
+import type { User } from '@supabase/supabase-js
 
 export default function Navbar() {
       const [scrolled, setScrolled] = useState(false)
@@ -56,9 +56,7 @@ export default function Navbar() {
       const rawName = (user && user.user_metadata && user.user_metadata.full_name) ? user.user_metadata.full_name : (user ? user.email : '') || ''
       const displayName = rawName.includes('@') ? rawName.split('@')[0] : rawName.split(' ')[0]
 
-  const btnClass = scrolled
-        ? 'border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:border-[#1C91D7] hover:text-[#1C91D7]'
-          : 'border-white/30 text-white hover:border-white hover:bg-white/10'
+  const btnClass = scrolled ? 'border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:border-[#1C91D7] hover:text-[#1C91D7]' : 'border-white/30 text-white hover:border-white hover:bg-white/10'
 
   return (
           <motion.nav
