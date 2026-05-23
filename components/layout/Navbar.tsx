@@ -71,37 +71,37 @@ export default function Navbar() {
                         <div className="flex items-center justify-between h-18 py-4">
                                   <Link href="/" className="flex items-center flex-shrink-0">
                                               <Image src="/images/expat_teachers_lounge_logo.png" alt="Expat Teacher's Lounge" width={180} height={40} priority className="h-10 w-auto object-contain" />
-                                  </Link>Link>
+                                  </Link>
                                   <div className="hidden md:flex items-center gap-8">
                                       {navLinks.map((link) => (
                                     <Link key={link.href} href={link.href} className={`relative text-sm font-medium transition-colors duration-200 ${scrolled ? (isActive(link.href) ? 'text-[#1C91D7]' : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white') : (isActive(link.href) ? 'text-[#FCCB52]' : 'text-white/90 hover:text-white')}`}>
                                         {link.label}
                                         {isActive(link.href) && <motion.span layoutId="nav-underline" className={`absolute -bottom-1 left-0 right-0 h-0.5 rounded-full ${scrolled ? 'bg-[#1C91D7]' : 'bg-[#FCCB52]'}`} />}
-                                    </Link>Link>
+                                    </Link>
                                   ))}
-                                  </div>div>
+                                  </div>
                                   <div className="hidden md:flex items-center gap-3">
                                               <ThemeToggle scrolled={scrolled} />
                                       {!loadingUser && user ? (
                                     <>
                                                     <Link href="/dashboard" className={`text-sm font-medium px-4 py-2 rounded-lg border transition-all duration-200 ${btnClass}`}>
                                                         {displayName ? 'Hi, ' + displayName : 'Dashboard'}
-                                                    </Link>Link>
+                                                    </Link>
                                                     <button onClick={handleSignOut} className="text-sm font-semibold px-4 py-2 rounded-lg bg-[#1C91D7] text-white hover:bg-[#1680c0] transition-all duration-200">
                                                                       Sign out
-                                                    </button>button>
-                                    </>>
+                                                    </button>
+                                    </>
                                   ) : null}
-                                  </div>div>
+                                  </div>
                                   <button onClick={() => setMobileOpen(!mobileOpen)} className={`md:hidden p-2 rounded-lg transition-colors ${scrolled ? 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800' : 'text-white hover:bg-white/10'}`} aria-label="Toggle menu">
                                               <div className="w-5 h-4 flex flex-col justify-between">
                                                             <motion.span animate={mobileOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }} className="block h-0.5 bg-current rounded-full" />
                                                             <motion.span animate={mobileOpen ? { opacity: 0 } : { opacity: 1 }} className="block h-0.5 bg-current rounded-full" />
                                                             <motion.span animate={mobileOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }} className="block h-0.5 bg-current rounded-full" />
-                                              </div>div>
-                                  </button>button>
-                        </div>div>
-                </div>div>
+                                              </div>
+                                  </button>
+                        </div>
+                </div>
                 <AnimatePresence>
                     {mobileOpen && (
                                 <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3 }} className="fixed top-[72px] left-0 right-0 z-40 bg-white dark:bg-[#0a0b14] border-b border-gray-100 dark:border-gray-800">
@@ -109,22 +109,22 @@ export default function Navbar() {
                                                 {navLinks.map((link) => (
                                                     <Link key={link.href} href={link.href} className={`text-base font-medium py-2 border-b border-gray-100 dark:border-gray-800 ${isActive(link.href) ? 'text-[#1C91D7]' : 'text-gray-700 dark:text-gray-300'}`}>
                                                         {link.label}
-                                                    </Link>Link>
+                                                    </Link>
                                                   ))}
                                                           <div className="flex flex-col gap-3 pt-2">
                                                               {user ? (
                                                       <>
                                                                           <Link href="/dashboard" className="text-center text-sm font-medium px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">
                                                                               {displayName ? 'Hi, ' + displayName : 'Dashboard'}
-                                                                          </Link>Link>
-                                                                          <button onClick={handleSignOut} className="text-center text-sm font-semibold px-4 py-3 rounded-lg bg-[#1C91D7] text-white">Sign out</button>button>
-                                                      </>>
+                                                                          </Link>
+                                                                          <button onClick={handleSignOut} className="text-center text-sm font-semibold px-4 py-3 rounded-lg bg-[#1C91D7] text-white">Sign out</button>
+                                                      </>
                                                     )}
-                                                          </div>div>
-                                            </div>div>
-                                </motion.div>motion.div>
+                                                          </div>
+                                            </div>
+                                </motion.div>
                               )}
-                </AnimatePresence>AnimatePresence>
-          </motion.nav>motion.nav>
+                </AnimatePresence>
+          </motion.nav>
         )
 }</></></></></motion.nav>
