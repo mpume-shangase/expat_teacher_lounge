@@ -7,7 +7,7 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import ThemeToggle from './ThemeToggle'
 import { createClient } from '@/lib/supabase/client'
-import type { User } from '@supabase/supabase-js
+import type { User } from '@supabase/supabase-js'
 
 export default function Navbar() {
       const [scrolled, setScrolled] = useState(false)
