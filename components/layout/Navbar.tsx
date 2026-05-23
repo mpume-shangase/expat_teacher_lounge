@@ -91,11 +91,6 @@ export default function Navbar() {
                                                                       Sign out
                                                     </button>button>
                                     </>>
-                                  ) : !loadingUser ? (
-                                    <>
-                                                    <Link href="/login" className={`text-sm font-medium px-4 py-2 rounded-lg border transition-all duration-200 ${btnClass}`}>Log in</Link>Link>
-                                                    <Link href="/pricing" className="text-sm font-semibold px-4 py-2 rounded-lg bg-[#1C91D7] text-white hover:bg-[#1680c0] transition-all duration-200">Join free</Link>Link>
-                                    </>>
                                   ) : null}
                                   </div>div>
                                   <button onClick={() => setMobileOpen(!mobileOpen)} className={`md:hidden p-2 rounded-lg transition-colors ${scrolled ? 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800' : 'text-white hover:bg-white/10'}`} aria-label="Toggle menu">
@@ -123,11 +118,6 @@ export default function Navbar() {
                                                                               {displayName ? 'Hi, ' + displayName : 'Dashboard'}
                                                                           </Link>Link>
                                                                           <button onClick={handleSignOut} className="text-center text-sm font-semibold px-4 py-3 rounded-lg bg-[#1C91D7] text-white">Sign out</button>button>
-                                                      </>>
-                                                    ) : (
-                                                      <>
-                                                                          <Link href="/login" className="text-center text-sm font-medium px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">Log in</Link>Link>
-                                                                          <Link href="/pricing" className="text-center text-sm font-semibold px-4 py-3 rounded-lg bg-[#1C91D7] text-white">Join free</Link>Link>
                                                       </>>
                                                     )}
                                                           </div>div>
