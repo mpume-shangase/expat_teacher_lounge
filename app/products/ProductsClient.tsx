@@ -22,6 +22,14 @@ const guides: Product[] = [
     image: "/images/Edwina_reading_a_book.png",
     description: "A comprehensive guide on salary benchmarks, benefits package standards, and key international teaching hubs.",
     ctaText: "Purchase Now"
+  },
+  {
+    title: "The Canada Teaching Certification Roadmap",
+    price: "$7.99",
+    link: "/products/the-canada-teaching-certification-roadmap",
+    image: null,
+    description: "Province-by-province roadmap: who certifies you, the exact documents you need, what it costs, and the order to do it in.",
+    ctaText: "Purchase Now"
   }
 ];
 
@@ -48,6 +56,30 @@ const interactiveTools: Product[] = [
     link: "https://buy.stripe.com/14A4gr7epgtYd4g9ICc3m03",
     image: "/images/Thumbnail-Country Decision Matrix.png",
     description: "A structured, objective framework to narrow down your country options and make a final relocation decision with confidence.",
+    ctaText: "Purchase Now"
+  },
+  {
+    title: "The Pathways to Teach Canada — Application Kit",
+    price: "$9.99",
+    link: "/products/the-pathways-to-teach-canada-application-kit",
+    image: null,
+    description: "Interactive kit to navigate credentials assessment: eligibility checker, step walkthroughs, email templates, and application tracker.",
+    ctaText: "Purchase Now"
+  },
+  {
+    title: "The Canada Province Picker — Find your best-fit province",
+    price: "$7.99",
+    link: "/products/the-canada-province-picker-find-your-best-fit-province",
+    image: null,
+    description: "Interactive decision tool: quiz-driven province matchmaking dashboard and side-by-side comparison matrix.",
+    ctaText: "Purchase Now"
+  },
+  {
+    title: "The Canada Teaching Certification Guide — Interactive",
+    price: "$8.99",
+    link: "/products/the-canada-teaching-certification-guide-interactive",
+    image: null,
+    description: "Interactive province-by-province certification guide including requirements, fees, timelines, and a jargon-buster.",
     ctaText: "Purchase Now"
   }
 ];
@@ -112,6 +144,14 @@ const freeResources: Product[] = [
     link: "https://drive.google.com/file/d/16wDe6ei6MkTz-KbNmbf9DeemGCiOjHOU/view?usp=drive_link",
     image: "/images/thumbnail_international _teaching_research _resources_navigation_guide.png",
     description: "Essential links, recruitment portals, and resources for landing a global teaching job.",
+    ctaText: "Download Free"
+  },
+  {
+    title: "Teach in Canada: The Province Shortlist",
+    price: "Free",
+    link: "https://cdn.shopify.com/s/files/1/0823/4391/9830/files/Teach_in_Canada_The_Province_Shortlist.pdf?v=1781204553",
+    image: null,
+    description: "Clean, actionable overview of Canadian provinces to narrow down your target location.",
     ctaText: "Download Free"
   }
 ];

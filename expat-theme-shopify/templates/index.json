@@ -1,0 +1,302 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "badge_text": "18 years • 4 countries • built by a teacher, for teachers",
+        "title_prefix": "Your international teaching move,",
+        "title_highlight": "done",
+        "title_italic": "right.",
+        "description": "Skip the Facebook group confusion and the sketchy recruiter agencies. Get the exact roadmap, contract intel, and market-ready strategy you need to secure a premium international teaching role.",
+        "cta_1_text": "Explore Products",
+        "cta_1_url": "shopify://collections/all",
+        "cta_2_text": "Book Coaching",
+        "cta_2_url": "shopify://pages/coaching",
+        "trust_text": "Trusted by many teachers",
+        "hero_image": "shopify://shop_images/Edwina_working_with_a_student.png"
+      }
+    },
+    "proof_bar": {
+      "type": "proof-bar",
+      "blocks": {
+        "stat_item_3PBMXe": {
+          "type": "stat_item",
+          "settings": {
+            "stat_value": "200+",
+            "stat_label": "Teachers helped"
+          }
+        },
+        "stat_item_8VGAgz": {
+          "type": "stat_item",
+          "settings": {
+            "stat_value": "16",
+            "stat_label": "Countries covered"
+          }
+        },
+        "stat_item_XyyzyM": {
+          "type": "stat_item",
+          "settings": {
+            "stat_value": "18 yrs",
+            "stat_label": "Teaching experience"
+          }
+        },
+        "stat_item_db6tVX": {
+          "type": "stat_item",
+          "settings": {
+            "stat_value": "4.9",
+            "stat_label": "Average rating"
+          }
+        }
+      },
+      "block_order": [
+        "stat_item_3PBMXe",
+        "stat_item_8VGAgz",
+        "stat_item_XyyzyM",
+        "stat_item_db6tVX"
+      ],
+      "settings": {}
+    },
+    "how_it_works": {
+      "type": "how-it-works",
+      "blocks": {
+        "step_hPTkYK": {
+          "type": "step",
+          "settings": {
+            "step_number": "01",
+            "title": "Information Gathering",
+            "description": "We provide you with clear, accurate data on international teaching markets, eliminating the noise of Facebook forums."
+          }
+        },
+        "step_eKQKkY": {
+          "type": "step",
+          "settings": {
+            "step_number": "02",
+            "title": "Strategic Positioning",
+            "description": "Optimize your CV and interview strategy to stand out to premium tier 1 and tier 2 international schools."
+          }
+        },
+        "step_9bpbnV": {
+          "type": "step",
+          "settings": {
+            "step_number": "03",
+            "title": "Contract Negotiation",
+            "description": "Never sign blind. We help you review your offer and negotiate the true market rate for your experience."
+          }
+        }
+      },
+      "block_order": [
+        "step_hPTkYK",
+        "step_eKQKkY",
+        "step_9bpbnV"
+      ],
+      "settings": {
+        "title_prefix": "A proven framework for",
+        "title_italic": "success.",
+        "subtitle": "Stop guessing. Follow the exact step-by-step roadmap that has successfully placed hundreds of teachers into life-changing international roles."
+      }
+    },
+    "destinations": {
+      "type": "destinations",
+      "blocks": {
+        "destination_gftYWz": {
+          "type": "destination",
+          "settings": {
+            "title": "Qatar",
+            "description": "High savings potential, modern infrastructure, and excellent flight connections to explore the globe."
+          }
+        },
+        "destination_zpi9kW": {
+          "type": "destination",
+          "settings": {
+            "title": "UAE",
+            "description": "Tax-free salaries, vibrant expat communities, and world-class premium amenities."
+          }
+        },
+        "destination_nwnkLL": {
+          "type": "destination",
+          "settings": {
+            "title": "China",
+            "description": "Unmatched saving potential and rapid professional development."
+          }
+        },
+        "destination_wpMBqa": {
+          "type": "destination",
+          "settings": {
+            "title": "Saudi Arabia",
+            "description": "The fastest growing education market globally with premium salary packages."
+          }
+        }
+      },
+      "block_order": [
+        "destination_gftYWz",
+        "destination_zpi9kW",
+        "destination_nwnkLL",
+        "destination_wpMBqa"
+      ],
+      "settings": {
+        "title_prefix": "Where will you",
+        "title_italic": "teach next?"
+      }
+    },
+    "featured_products": {
+      "type": "featured-products",
+      "settings": {
+        "title_prefix": "Start your",
+        "title_italic": "journey.",
+        "description": "Premium guides and tools built specifically for educators moving abroad.",
+        "collection": "guides",
+        "product_limit": 4,
+        "view_all_text": "VIEW ALL PRODUCTS"
+      }
+    },
+    "free_resources": {
+      "type": "free-resources",
+      "blocks": {
+        "resource_UwwGP9": {
+          "type": "resource",
+          "settings": {
+            "title": "Qatar Document Attestation Checklist",
+            "cover_image": "shopify://shop_images/Documentation_Checklist_for_UK_and_Qatar_1.png",
+            "download_url": "shopify://products/qatar-document-checklist"
+          }
+        },
+        "resource_ghU69j": {
+          "type": "resource",
+          "settings": {
+            "title": "Qatar Immigration Checklist",
+            "cover_image": "shopify://shop_images/Thumbnail_-_Qatar_Teacher_Immigration_Residence_Permit_Checklist.png",
+            "download_url": "shopify://products/qatar-immigration-checklist"
+          }
+        },
+        "resource_canada_shortlist": {
+          "type": "resource",
+          "settings": {
+            "title": "Teach in Canada: The Province Shortlist",
+            "cover_image": "",
+            "download_url": "https://cdn.shopify.com/s/files/1/0823/4391/9830/files/Teach_in_Canada_The_Province_Shortlist.pdf?v=1781204553"
+          }
+        }
+      },
+      "block_order": [
+        "resource_UwwGP9",
+        "resource_ghU69j",
+        "resource_canada_shortlist"
+      ],
+      "settings": {
+        "title_prefix": "Free",
+        "title_italic": "Resources.",
+        "description": "Kickstart your relocation journey with checklists and guides we use every day."
+      }
+    },
+    "coaching_preview": {
+      "type": "coaching-preview",
+      "blocks": {
+        "package_t9Ywtq": {
+          "type": "package",
+          "settings": {
+            "title": "Relocation Strategy",
+            "price": "$97",
+            "description": "60 minute structured sprint via Zoom."
+          }
+        },
+        "package_AJ3BAm": {
+          "type": "package",
+          "settings": {
+            "title": "Contract Review",
+            "price": "$77",
+            "description": "45 minute contract review before you sign."
+          }
+        }
+      },
+      "block_order": [
+        "package_t9Ywtq",
+        "package_AJ3BAm"
+      ],
+      "settings": {
+        "title_prefix": "Need a",
+        "title_italic": "Strategic Partner?",
+        "description": "Stop guessing what a 'good' package looks like. Book a 1-on-1 strategy session to review your contract, optimize your CV, and negotiate exactly what you're worth.",
+        "coaching_image": "shopify://shop_images/Edwina_delivering_a_presentation.png",
+        "cta_text": "View Coaching Packages",
+        "cta_url": "shopify://pages/coaching"
+      }
+    },
+    "authority": {
+      "type": "authority",
+      "settings": {
+        "title": "I've been in your shoes.",
+        "description": "For the last 18 years, I've navigated curriculums in South Africa, the UK, Qatar, and Canada. I've seen teachers accept lowball offers, struggle with attestation, and land in bad accommodations—all because they didn't know the playbook.",
+        "quote": "I built Expat Teacher's Lounge so you don't have to make the same mistakes."
+      }
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "blocks": {
+        "testimonial_qgeDm4": {
+          "type": "testimonial",
+          "settings": {
+            "quote_text": "I had been thinking about teaching internationally for three years but kept putting it off because I didn't know where to start. The Country Comparison Tool gave me exactly what I needed.",
+            "author_name": "Sarah Mitchell",
+            "author_role": "Primary Teacher",
+            "author_location": "Now teaching in Doha, Qatar"
+          }
+        },
+        "testimonial_RGQJRc": {
+          "type": "testimonial",
+          "settings": {
+            "quote_text": "The International Teaching Market Overview gave me data I couldn't find anywhere else in one place — salary benchmarks, hiring timelines, subject demand by region. As someone moving to the Middle East for the first time with a family, I needed more than opinions from Facebook groups. This gave me real numbers and the confidence to negotiate a significantly better package.",
+            "author_name": "David Okonkwo",
+            "author_role": "Secondary Maths Teacher",
+            "author_location": "Now teaching in Dubai, UAE"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_qgeDm4",
+        "testimonial_RGQJRc"
+      ],
+      "settings": {
+        "title_prefix": "Don't just take",
+        "title_italic": "my word for it."
+      }
+    },
+    "blog_preview": {
+      "type": "blog-preview",
+      "settings": {
+        "title_prefix": "Latest from the",
+        "title_italic": "Lounge.",
+        "blog": "news",
+        "view_all_text": "VIEW ALL POSTS"
+      }
+    },
+    "email_capture": {
+      "type": "email-capture",
+      "settings": {
+        "title": "Relocation intel, straight to your inbox.",
+        "description": "Visa updates, salary benchmarks, and destination guides for teachers serious about their next move."
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "proof_bar",
+    "how_it_works",
+    "destinations",
+    "featured_products",
+    "free_resources",
+    "coaching_preview",
+    "authority",
+    "testimonials",
+    "blog_preview",
+    "email_capture"
+  ]
+}

@@ -9,6 +9,7 @@ export const freeResources = [
   { title: "Qatar Teacher Immigration Checklist", link: "https://drive.google.com/file/d/1UMgNsJjvVQzCXEMbJAYksE3BGLnTU_z8/view?usp=sharing", image: "/images/Thumbnail - Qatar Teacher Immigration Checklist.png" },
   { title: "Guide to Reputable British & American Schools in Qatar", link: "https://drive.google.com/file/d/1q-gX_7FJ61zy3QC5Loc1vRQQdqavwRnE/view?usp=sharing", image: "/images/thumbnail - Navigation Guide.png" },
   { title: "International Teaching Resource & Navigation Guide", link: "https://drive.google.com/file/d/16wDe6ei6MkTz-KbNmbf9DeemGCiOjHOU/view?usp=drive_link", image: "/images/thumbnail_international _teaching_research _resources_navigation_guide.png" },
+  { title: "Teach in Canada: The Province Shortlist", link: "https://cdn.shopify.com/s/files/1/0823/4391/9830/files/Teach_in_Canada_The_Province_Shortlist.pdf?v=1781204553", image: null },
 ];
 
 export default function FreeResources() {
