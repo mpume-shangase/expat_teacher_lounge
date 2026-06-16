@@ -42,6 +42,9 @@ export async function POST(request: Request) {
     cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/pricing`,
     subscription_data: {
       metadata: { supabase_user_id: user.id }
+    },
+    consent_collection: {
+      promotions: 'auto'
     }
   })
 

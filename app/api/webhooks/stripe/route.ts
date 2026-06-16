@@ -32,6 +32,25 @@ export async function POST(request: Request) {
   }
 
   switch (event.type) {
+    case 'checkout.session.completed': {
+      const session = event.data.object as any
+      const email = session.customer_details?.email
+      const consent = session.consent_collection?.promotions
+      const name = session.customer_details?.name || ''
+      const [firstName, ...lastNameParts] = name.split(' ')
+      const lastName = lastNameParts.join(' ')
+
+      if (email && consent === 'opt_in') {
+        const { subscribeToKlaviyo } = await import('@/lib/email/klaviyo')
+        subscribeToKlaviyo({
+          email,
+          firstName,
+          lastName,
+        }).catch(() => {})
+      }
+      break
+    }
+
     case 'customer.subscription.created':
     case 'customer.subscription.updated': {
       const subscription = event.data.object as any
