@@ -117,7 +117,7 @@ const freeResources: Product[] = [
   {
     title: "Qatar Document Attestation Checklist",
     price: "Free",
-    link: "https://drive.google.com/file/d/1ugj0TeUoQ7Z6zT8QaW6QcQdu5Y4l99xJ/view?usp=sharing",
+    link: "https://expatteacherslounge.com/products/qatar-document-checklist",
     image: "/images/Thumbnail- Documentation Checklist.png",
     description: "Step-by-step instructions for certifying your credentials for Qatar.",
     ctaText: "Download Free"
@@ -125,7 +125,7 @@ const freeResources: Product[] = [
   {
     title: "Qatar Teacher Immigration Checklist",
     price: "Free",
-    link: "https://drive.google.com/file/d/1UMgNsJjvVQzCXEMbJAYksE3BGLnTU_z8/view?usp=sharing",
+    link: "https://expatteacherslounge.com/products/qatar-immigration-checklist",
     image: "/images/Thumbnail - Qatar Teacher Immigration Checklist.png",
     description: "Immigration steps, medical tests, and fingerprint clearance walkthrough.",
     ctaText: "Download Free"
@@ -133,7 +133,7 @@ const freeResources: Product[] = [
   {
     title: "Guide to Reputable British & American Schools in Qatar",
     price: "Free",
-    link: "https://drive.google.com/file/d/1q-gX_7FJ61zy3QC5Loc1vRQQdqavwRnE/view?usp=sharing",
+    link: "https://expatteacherslounge.com/products/guide-to-reputable-british-american-schools-in-qatar",
     image: "/images/thumbnail - Navigation Guide.png",
     description: "Curated list of tier-1 and tier-2 international schools in Doha.",
     ctaText: "Download Free"
@@ -141,7 +141,7 @@ const freeResources: Product[] = [
   {
     title: "International Teaching Resource & Navigation Guide",
     price: "Free",
-    link: "https://drive.google.com/file/d/16wDe6ei6MkTz-KbNmbf9DeemGCiOjHOU/view?usp=drive_link",
+    link: "https://expatteacherslounge.com/products/international-teaching-resource-navigation-guide",
     image: "/images/thumbnail_international _teaching_research _resources_navigation_guide.png",
     description: "Essential links, recruitment portals, and resources for landing a global teaching job.",
     ctaText: "Download Free"
@@ -149,7 +149,7 @@ const freeResources: Product[] = [
   {
     title: "Teach in Canada: The Province Shortlist",
     price: "Free",
-    link: "https://cdn.shopify.com/s/files/1/0823/4391/9830/files/Teach_in_Canada_The_Province_Shortlist.pdf?v=1781204553",
+    link: "https://expatteacherslounge.com/products/teach-in-canada-the-province-shortlist",
     image: null,
     description: "Clean, actionable overview of Canadian provinces to narrow down your target location.",
     ctaText: "Download Free"
