@@ -121,15 +121,43 @@ export default function CoachingPage() {
 
       {/* Calendly Placeholder */}
       <section id="booking" className="py-24 bg-gray-50 dark:bg-[#0d0e1b] border-t border-gray-200 dark:border-gray-800">
-        <div className="container mx-auto px-6 md:px-12 max-w-4xl text-center">
+        <div className="container mx-auto px-6 md:px-12 max-w-6xl">
            <ScrollReveal>
-             <h2 className="font-display font-black text-4xl mb-6 dark:text-white">Book your <span className="text-brand-blue italic">Session.</span></h2>
-             <p className="text-gray-600 dark:text-gray-400 mb-12">Select an available time below. Payment is processed securely via Stripe.</p>
-             <div className="bg-white dark:bg-[#121324] border border-gray-200 dark:border-gray-800 rounded-3xl h-[600px] flex items-center justify-center shadow-lg">
-               <div className="text-gray-400 flex flex-col items-center">
-                 <svg className="w-16 h-16 mb-4 text-gray-300 dark:text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-                 <p className="font-bold text-xl">Calendly Widget Placeholder</p>
-                 <p className="text-sm mt-2">Replace with Calendly inline embed code.</p>
+             <div className="text-center mb-12">
+               <h2 className="font-display font-black text-4xl mb-6 dark:text-white">Book your <span className="text-brand-blue italic">Session.</span></h2>
+               <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">Select an available time below. Payment is processed securely via Stripe.</p>
+             </div>
+             
+             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+               {/* Video column */}
+               <div className="lg:col-span-5 bg-white dark:bg-[#121324] border border-gray-200 dark:border-gray-800 rounded-3xl p-6 md:p-8 flex flex-col justify-between shadow-lg">
+                 <div>
+                   <h3 className="font-display font-bold text-2xl mb-4 text-gray-900 dark:text-white flex items-center gap-2">
+                     <span className="text-brand-blue">▶</span> How to Book
+                   </h3>
+                   <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
+                     Watch this quick video walkthrough to see how easily you can select a date, complete the intake form, and schedule your strategy session.
+                   </p>
+                 </div>
+                 <div className="relative pb-[56.25%] h-0 rounded-2xl overflow-hidden shadow-inner bg-black border border-gray-100 dark:border-gray-800">
+                   <iframe
+                     src="https://www.youtube.com/embed/IGbwE8e_SiI"
+                     title="How to book a coaching session"
+                     frameBorder="0"
+                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                     allowFullScreen
+                     className="absolute top-0 left-0 w-full h-full"
+                   ></iframe>
+                 </div>
+               </div>
+               
+               {/* Booking Column */}
+               <div className="lg:col-span-7 bg-white dark:bg-[#121324] border border-gray-200 dark:border-gray-800 rounded-3xl min-h-[500px] flex items-center justify-center shadow-lg">
+                 <div className="text-gray-400 flex flex-col items-center p-6 text-center">
+                   <svg className="w-16 h-16 mb-4 text-gray-300 dark:text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                   <p className="font-bold text-xl text-gray-700 dark:text-gray-300">Calendly Widget Placeholder</p>
+                   <p className="text-sm mt-2 max-w-xs">The interactive booking calendar will display here once the live widget is configured.</p>
+                 </div>
                </div>
              </div>
            </ScrollReveal>

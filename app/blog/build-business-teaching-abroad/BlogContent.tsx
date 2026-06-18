@@ -58,11 +58,8 @@ export default function BlogContent() {
       </div>
 
       {/* SECTION 2 — MAIN CONTENT AREA */}
-      <section className="py-[80px] px-6 md:px-12 max-w-[1100px] mx-auto w-full">
-        <div className="flex flex-col lg:flex-row gap-[64px]">
-          
-          {/* LEFT COLUMN — Article body */}
-          <div className="w-full lg:max-w-[720px] flex-shrink-0">
+      <section className="py-[80px] px-6 md:px-12 max-w-4xl mx-auto w-full">
+        <div className="max-w-[720px] mx-auto">
              
              {/* INTRO PULL QUOTE */}
              <motion.blockquote
@@ -291,13 +288,13 @@ export default function BlogContent() {
                ))}
              </motion.div>
 
-             <hr className="border-t border-[rgba(0,0,0,0.08)] dark:border-[rgba(255,255,255,0.08)] my-8" />
+             <hr className="border-t border-[rgba(0,0,0,0.08)] dark:border-[rgba(255,255,255,0.08)] my-12" />
 
              {/* AUTHOR BIO */}
              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} className="flex flex-col sm:flex-row gap-[16px] bg-[rgba(0,0,0,0.03)] dark:bg-[rgba(255,255,255,0.03)] rounded-[12px] p-[24px] border border-[rgba(0,0,0,0.06)] dark:border-[rgba(255,255,255,0.06)]">
                <div className="flex-shrink-0">
                   <div className="relative w-[64px] h-[64px] rounded-full overflow-hidden flex items-center justify-center">
-                    <Image src="/images/Edwina_headshot.png" alt="Edwina Shangase" fill className="object-cover object-top relative z-10" />
+                    <Image src="/images/Edwina_headshot_new.png" alt="Edwina Shangase" fill className="object-cover object-top relative z-10" />
                   </div>
                </div>
                <div>
@@ -309,93 +306,49 @@ export default function BlogContent() {
                </div>
              </motion.div>
 
-          </div>
+             <hr className="border-t border-[rgba(0,0,0,0.08)] dark:border-[rgba(255,255,255,0.08)] my-12" />
 
-          {/* RIGHT COLUMN — Sidebar */}
-          <div className="w-full lg:w-[300px] flex-shrink-0 relative">
-             <div className="sticky top-[100px] space-y-[24px]">
-                
-                {/* Widget 1 — About Edwina */}
-                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ delay: 0.1 }} className="bg-white dark:bg-[#13151f] border border-[rgba(0,0,0,0.08)] dark:border-[rgba(255,255,255,0.08)] rounded-[16px] p-[24px]">
-                  <div className="relative w-[80px] h-[80px] rounded-full overflow-hidden mb-4">
-                    <Image src="/images/Edwina_headshot.png" alt="Edwina Shangase" fill className="object-cover object-top" />
-                  </div>
-                  <div className="font-display font-bold text-[16px] text-gray-900 dark:text-white">Edwina Shangase</div>
-                  <div className="text-gray-500 dark:text-gray-400 text-[12px] font-body mb-[10px]">Founder · 18 years international teaching</div>
-                  <p className="text-gray-500 dark:text-gray-400 text-[13px] font-body mb-[16px] leading-relaxed">
-                    South African teacher who has lived and worked in the UK, Qatar, and Canada.
-                  </p>
-                  <a href="/about" className="text-brand-blue text-[13px] font-medium hover:underline flex items-center">
-                    Read my story <span className="ml-1">→</span>
-                  </a>
-                </motion.div>
-
-                {/* Widget 2 — Featured Products */}
-                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ delay: 0.2 }} className="bg-white dark:bg-[#13151f] border border-[rgba(0,0,0,0.08)] dark:border-[rgba(255,255,255,0.08)] rounded-[16px] p-[24px]">
-                  <div className="font-display font-bold text-[16px] text-gray-900 dark:text-white mb-[16px]">Tools to start your journey</div>
-                  <div className="space-y-[12px]">
-                    <a href="https://buy.stripe.com/5kQ4grbuF1z42pC1c6c3m01" target="_blank" rel="noopener noreferrer" className="flex justify-between items-center group">
-                      <span className="text-brand-blue text-[13px] font-medium group-hover:underline">Personal Goal Assessment</span>
-                      <span className="text-[#0F6E56] font-bold text-[11px] bg-[#E1F5EE] px-[6px] py-[2px] rounded-md">$6.00</span>
+             {/* RELATED RESOURCES & NEWSLETTER GRIDS */}
+             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Tools to start Card */}
+                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} className="bg-white dark:bg-[#13151f] border border-[rgba(0,0,0,0.08)] dark:border-[rgba(255,255,255,0.08)] rounded-3xl p-6 md:p-8 shadow-sm">
+                  <h4 className="font-display font-bold text-lg text-gray-900 dark:text-white mb-3">Tools to Start Your Journey</h4>
+                  <div className="space-y-3 mt-4">
+                    <a href="https://buy.stripe.com/5kQ4grbuF1z42pC1c6c3m01" target="_blank" rel="noopener noreferrer" className="flex justify-between items-center group text-sm font-medium">
+                      <span className="text-brand-blue group-hover:underline">Personal Goal Assessment</span>
+                      <span className="text-[#0F6E56] font-bold text-xs bg-[#E1F5EE] px-2 py-0.5 rounded-md">$6.00</span>
                     </a>
-                    <a href="https://buy.stripe.com/3cI6ozfKV1z43tGaMGc3m02" target="_blank" rel="noopener noreferrer" className="flex justify-between items-center group">
-                      <span className="text-brand-blue text-[13px] font-medium group-hover:underline">Country Comparison Tool</span>
-                      <span className="text-[#0F6E56] font-bold text-[11px] bg-[#E1F5EE] px-[6px] py-[2px] rounded-md">$7.99</span>
+                    <a href="https://buy.stripe.com/3cI6ozfKV1z43tGaMGc3m02" target="_blank" rel="noopener noreferrer" className="flex justify-between items-center group text-sm font-medium">
+                      <span className="text-brand-blue group-hover:underline">Country Comparison Tool</span>
+                      <span className="text-[#0F6E56] font-bold text-xs bg-[#E1F5EE] px-2 py-0.5 rounded-md">$7.99</span>
                     </a>
-                    <a href="https://buy.stripe.com/14A8wHeGR7Xs2pC9ICc3m00" target="_blank" rel="noopener noreferrer" className="flex justify-between items-center group">
-                      <span className="text-brand-blue text-[13px] font-medium group-hover:underline flex-1">Market Overview 2025</span>
-                      <span className="text-[#0F6E56] font-bold text-[11px] bg-[#E1F5EE] px-[6px] py-[2px] rounded-md ml-2">$5.99</span>
+                    <a href="https://buy.stripe.com/14A8wHeGR7Xs2pC9ICc3m00" target="_blank" rel="noopener noreferrer" className="flex justify-between items-center group text-sm font-medium">
+                      <span className="text-brand-blue group-hover:underline">Market Overview 2025</span>
+                      <span className="text-[#0F6E56] font-bold text-xs bg-[#E1F5EE] px-2 py-0.5 rounded-md">$5.99</span>
                     </a>
                   </div>
                 </motion.div>
 
-                {/* Widget 3 — Affiliate Tools */}
-                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ delay: 0.3 }} className="bg-white dark:bg-[#13151f] border border-[rgba(0,0,0,0.08)] dark:border-[rgba(255,255,255,0.08)] rounded-[16px] p-[24px]">
-                  <div className="font-display font-bold text-[16px] text-gray-900 dark:text-white mb-[16px]">Tools I use and recommend</div>
-                  <div className="space-y-[16px]">
-                    {/* Card 1 — Wise */}
-                    <div className="flex flex-col gap-2 p-[12px] bg-[rgba(0,0,0,0.02)] dark:bg-[rgba(255,255,255,0.02)] rounded-[12px] border border-[rgba(0,0,0,0.04)] dark:border-[rgba(255,255,255,0.04)]">
-                      <div className="flex items-center gap-3 mb-1">
-                         <div className="w-[40px] h-[40px] rounded-full bg-[#0ea5b5] flex-shrink-0 flex items-center justify-center text-white text-lg">💸</div>
-                         <div>
-                            <div className="font-semibold text-[14px] text-gray-900 dark:text-white leading-none">Wise</div>
-                            <div className="text-gray-500 dark:text-gray-400 text-[12px] leading-tight mt-[6px]">Multi-currency accounts for expat entrepreneurs</div>
-                         </div>
+                {/* Affiliate Tools Card */}
+                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ delay: 0.1 }} className="bg-white dark:bg-[#13151f] border border-[rgba(0,0,0,0.08)] dark:border-[rgba(255,255,255,0.08)] rounded-3xl p-6 md:p-8 shadow-sm">
+                  <h4 className="font-display font-bold text-lg text-gray-900 dark:text-white mb-3">Tools I Recommend</h4>
+                  <div className="space-y-4 mt-4">
+                    <div className="flex items-center justify-between text-sm">
+                      <div className="flex items-center gap-2">
+                        <span className="text-lg">💸</span>
+                        <span className="font-semibold text-gray-900 dark:text-white">Wise</span>
                       </div>
-                      <a href="https://wise.com/invite/dic/nompumelelos1" target="_blank" rel="sponsored noopener noreferrer" className="text-[#0ea5b5] font-semibold text-[13px] hover:underline mt-1">Open free account →</a>
+                      <a href="https://wise.com/invite/dic/nompumelelos1" target="_blank" rel="sponsored noopener noreferrer" className="text-[#0ea5b5] font-semibold hover:underline">Get Started →</a>
                     </div>
-                    
-                    {/* Card 2 — Hostinger */}
-                    <div className="flex flex-col gap-2 p-[12px] bg-[rgba(0,0,0,0.02)] dark:bg-[rgba(255,255,255,0.02)] rounded-[12px] border border-[rgba(0,0,0,0.04)] dark:border-[rgba(255,255,255,0.04)]">
-                      <div className="flex items-center gap-3 mb-1">
-                         <div className="w-[40px] h-[40px] rounded-full bg-brand-blue flex-shrink-0 flex items-center justify-center text-white text-lg">🌐</div>
-                         <div>
-                            <div className="font-semibold text-[14px] text-gray-900 dark:text-white leading-none">Hostinger</div>
-                            <div className="text-gray-500 dark:text-gray-400 text-[12px] leading-tight mt-[6px]">Affordable website hosting for teacher brands</div>
-                         </div>
+                    <div className="flex items-center justify-between text-sm">
+                      <div className="flex items-center gap-2">
+                        <span className="text-lg">🌐</span>
+                        <span className="font-semibold text-gray-900 dark:text-white">Hostinger</span>
                       </div>
-                      <a href="https://www.hostinger.com?REFERRALCODE=MPUMES" target="_blank" rel="sponsored noopener noreferrer" className="text-brand-blue font-semibold text-[13px] hover:underline mt-1">Get started →</a>
+                      <a href="https://www.hostinger.com?REFERRALCODE=MPUMES" target="_blank" rel="sponsored noopener noreferrer" className="text-brand-blue font-semibold hover:underline">Get Started →</a>
                     </div>
                   </div>
                 </motion.div>
-
-                {/* Widget 4 — Email Signup */}
-                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ delay: 0.4 }} className="bg-brand-deep rounded-[16px] p-[24px]">
-                  <div className="font-display font-bold text-[16px] text-white">Get more guides</div>
-                  <div className="text-white/65 text-[13px] font-body mb-[16px] mt-1">Relocation intel straight to your inbox.</div>
-                  <form onSubmit={(e) => e.preventDefault()} className="flex flex-col gap-3">
-                    <input 
-                      type="email" 
-                      placeholder="Email address" 
-                      required 
-                      className="w-full bg-white/12 text-white placeholder:text-white/40 border border-transparent focus:border-white/30 rounded-[8px] p-[10px_14px] text-[13px] outline-none" 
-                    />
-                    <button type="submit" className="w-full bg-[#FCCB52] text-[#3739DB] font-bold rounded-[8px] p-[10px] text-[13px] hover:bg-yellow-400 transition-colors">
-                      Subscribe
-                    </button>
-                  </form>
-                </motion.div>
-
              </div>
           </div>
 

@@ -90,7 +90,7 @@ export default function AboutContent() {
                    className="object-cover object-top rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.15)]" 
                  />
                  <div className="absolute -bottom-[30px] -right-[30px] w-[180px] h-[180px] rounded-2xl border-4 border-white dark:border-[#0a0b14] shadow-[0_20px_60px_rgba(0,0,0,0.2)] overflow-hidden z-10 hidden sm:block">
-                    <Image src="/images/Edwina_headshot.png" alt="Edwina headshot" fill className="object-cover" />
+                    <Image src="/images/Edwina_headshot_new.png" alt="Edwina headshot" fill className="object-cover" />
                  </div>
                  <div className="absolute -left-[16px] top-[60px] w-[4px] h-[120px] bg-[#FCCB52] rounded-sm z-10 hidden sm:block" />
               </div>

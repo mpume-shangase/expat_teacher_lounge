@@ -1,0 +1,732 @@
+{%- paginate collection.products by 12 -%}
+
+<!-- Products Page Hero -->
+<section class="relative flex items-center justify-center overflow-hidden" id="collection-hero-{{ section.id }}" style="height: 60vh; min-height: 480px; background-color: #0a0b14; color: #ffffff;">
+  
+  <style>
+    #collection-hero-{{ section.id }} h1 {
+      color: #ffffff !important;
+    }
+    #collection-hero-{{ section.id }} p {
+      color: rgba(255, 255, 255, 0.85) !important;
+    }
+  </style>
+
+  <!-- Background Image -->
+  <div class="absolute inset-0 z-0">
+    {%- if section.settings.hero_image != blank -%}
+      <img src="{{ section.settings.hero_image | image_url: width: 1600 }}" 
+           alt="Empower your transition" 
+           style="width: 100%; height: 100%; object-fit: cover; object-position: top;"
+           loading="eager">
+    {%- elsif collection.image != blank -%}
+      <img src="{{ collection.image | image_url: width: 1600 }}" 
+           alt="{{ collection.title | escape }}" 
+           style="width: 100%; height: 100%; object-fit: cover; object-position: top;"
+           loading="eager">
+    {%- else -%}
+      <!-- Default fallback background image -->
+      <img src="{{ 'Edwina_working_with_a_student.png' | asset_url }}" 
+           alt="Empower your transition fallback" 
+           style="width: 100%; height: 100%; object-fit: cover; object-position: top;"
+           loading="eager">
+    {%- endif -%}
+    
+    <!-- Dark gradient overlay to ensure legibility and seamless white bottom transition -->
+    <div class="absolute inset-0" style="background: linear-gradient(to bottom, rgba(10, 11, 20, 0.95) 0%, rgba(10, 11, 20, 0.7) 50%, var(--bg-light, #ffffff) 100%); z-index: 1;"></div>
+  </div>
+
+  <!-- Hero Content -->
+  <div class="container relative z-10" style="margin-top: 80px; text-align: center; width: 100%;">
+    <h1 class="font-display font-black" style="font-size: clamp(2.5rem, 6vw, 4.5rem); margin-bottom: 24px; line-height: 1.1; color: #ffffff;">
+      {{ section.settings.hero_title_prefix }} <span class="italic" style="color: var(--color-blue); font-style: italic;">{{ section.settings.hero_title_italic }}</span>
+    </h1>
+    <p style="color: rgba(255, 255, 255, 0.85); font-size: clamp(1.1rem, 2.5vw, 1.45rem); max-width: 650px; margin-left: auto; margin-right: auto; line-height: 1.5;">
+      {{ section.settings.hero_description }}
+    </p>
+  </div>
+
+</section>
+
+<!-- Collection listing -->
+<section class="section-padding bg-light text-light" style="padding-top: 80px; padding-bottom: 120px; background-color: var(--bg-light);">
+  <div class="container" style="max-width: 1000px;">
+    
+    {%- assign use_settings = false -%}
+    {%- if section.settings.guides_products != blank or section.settings.tools_products != blank or section.settings.coaching_products != blank -%}
+      {%- assign use_settings = true -%}
+    {%- endif -%}
+
+    {%- if use_settings -%}
+      {%- assign guides = section.settings.guides_products -%}
+      {%- assign tools = section.settings.tools_products -%}
+      {%- assign coaching = section.settings.coaching_products -%}
+    {%- else -%}
+      <!-- Fallback: Categorize dynamically from collection products -->
+      {%- assign guide_handles = "" -%}
+      {%- assign tool_handles = "" -%}
+      {%- assign coaching_handles = "" -%}
+
+      {%- for product in collection.products -%}
+        {%- assign title_dc = product.title | downcase -%}
+        {%- assign type_dc = product.type | downcase -%}
+        {%- assign handle_dc = product.handle | downcase -%}
+        
+        {%- if type_dc contains 'coaching' or title_dc contains 'coaching' or title_dc contains 'session' or handle_dc contains 'session' -%}
+          {%- assign coaching_handles = coaching_handles | append: product.handle | append: "," -%}
+        {%- elsif type_dc contains 'guide' or title_dc contains 'guide' or title_dc contains 'overview' or handle_dc contains 'overview' -%}
+          {%- assign guide_handles = guide_handles | append: product.handle | append: "," -%}
+        {%- else -%}
+          {%- assign tool_handles = tool_handles | append: product.handle | append: "," -%}
+        {%- endif -%}
+      {%- endfor -%}
+
+      <!-- Fallback if coaching products aren't in this collection list directly -->
+      {%- assign coaching_handles_arr = coaching_handles | split: "," -%}
+      {%- if coaching_handles_arr.size == 0 or coaching_handles == "" -%}
+        {%- assign rs_product = all_products['relocation-strategy-session'] -%}
+        {%- if rs_product != blank -%}
+          {%- assign coaching_handles = coaching_handles | append: rs_product.handle | append: "," -%}
+        {%- endif -%}
+        {%- assign cr_product = all_products['contract-review-session'] -%}
+        {%- if cr_product != blank -%}
+          {%- assign coaching_handles = coaching_handles | append: cr_product.handle | append: "," -%}
+        {%- endif -%}
+      {%- endif -%}
+
+      {%- assign guides = guide_handles | split: "," -%}
+      {%- assign tools = tool_handles | split: "," -%}
+      {%- assign coaching = coaching_handles | split: "," -%}
+    {%- endif -%}
+
+    <!-- 1. GUIDES CATEGORY -->
+    {%- assign guides_count = 0 -%}
+    {%- for item in guides -%}
+      {%- assign prod = item -%}
+      {%- if prod == blank or prod.title == blank -%}
+        {%- assign handle_str = item.handle | default: item -%}
+        {%- assign prod = all_products[handle_str] -%}
+        {%- if prod == blank or prod.title == blank -%}
+          {%- if handle_str contains 'roadmap' -%}
+            {%- assign prod = all_products['canada-teaching-certification-roadmap'] | default: all_products['the-canada-teaching-certification-roadmap'] -%}
+          {%- endif -%}
+        {%- endif -%}
+      {%- endif -%}
+      {%- if prod != blank and prod.title != blank -%}
+        {%- assign guides_count = guides_count | plus: 1 -%}
+      {%- endif -%}
+    {%- endfor -%}
+
+    {%- if guides_count > 0 -%}
+      <div style="margin-bottom: 80px;">
+        <div style="margin-bottom: 32px; border-bottom: 2px solid #e5e7eb; padding-bottom: 16px;">
+          <h2 class="font-display font-black" style="font-size: 2.25rem; margin: 0; color: var(--text-light);">
+            {{ section.settings.guides_title }}
+          </h2>
+          <p style="color: #64748b; margin: 8px 0 0 0; font-size: 1rem;">
+            {{ section.settings.guides_desc }}
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 grid-cols-2" style="gap: 40px;">
+          {%- for item in guides -%}
+            {%- assign prod = item -%}
+            {%- if prod == blank or prod.title == blank -%}
+              {%- assign handle_str = item.handle | default: item -%}
+              {%- assign prod = all_products[handle_str] -%}
+              {%- if prod == blank or prod.title == blank -%}
+                {%- if handle_str contains 'roadmap' -%}
+                  {%- assign prod = all_products['canada-teaching-certification-roadmap'] | default: all_products['the-canada-teaching-certification-roadmap'] -%}
+                {%- endif -%}
+              {%- endif -%}
+            {%- endif -%}
+            {%- if prod != blank and prod.title != blank -%}
+              {%- render 'product-card-item', product: prod -%}
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+    <!-- 2. INTERACTIVE TOOLS CATEGORY -->
+    {%- assign tools_count = 0 -%}
+    {%- for item in tools -%}
+      {%- assign prod = item -%}
+      {%- if prod == blank or prod.title == blank -%}
+        {%- assign handle_str = item.handle | default: item -%}
+        {%- assign prod = all_products[handle_str] -%}
+        {%- if prod == blank or prod.title == blank -%}
+          {%- if handle_str contains 'pathways' or handle_str contains 'application-kit' -%}
+            {%- assign prod = all_products['pathways-to-teach-canada-application-kit'] | default: all_products['the-pathways-to-teach-canada-application-kit'] | default: all_products['pathways-to-teach-canada'] -%}
+          {%- elsif handle_str contains 'province-picker' -%}
+            {%- assign prod = all_products['canada-province-picker'] | default: all_products['the-canada-province-picker'] | default: all_products['canada-province-picker-find-your-best-fit-province'] | default: all_products['the-canada-province-picker-find-your-best-fit-province'] -%}
+          {%- elsif handle_str contains 'certification-guide' -%}
+            {%- assign prod = all_products['canada-teaching-certification-guide'] | default: all_products['the-canada-teaching-certification-guide'] | default: all_products['canada-teaching-certification-guide-interactive'] | default: all_products['the-canada-teaching-certification-guide-interactive'] -%}
+          {%- endif -%}
+        {%- endif -%}
+      {%- endif -%}
+      {%- if prod != blank and prod.title != blank -%}
+        {%- assign tools_count = tools_count | plus: 1 -%}
+      {%- endif -%}
+    {%- endfor -%}
+
+    {%- if tools_count > 0 -%}
+      <div style="margin-bottom: 80px;">
+        <div style="margin-bottom: 32px; border-bottom: 2px solid #e5e7eb; padding-bottom: 16px;">
+          <h2 class="font-display font-black" style="font-size: 2.25rem; margin: 0; color: var(--text-light);">
+            {{ section.settings.tools_title }}
+          </h2>
+          <p style="color: #64748b; margin: 8px 0 0 0; font-size: 1rem;">
+            {{ section.settings.tools_desc }}
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 grid-cols-2" style="gap: 40px;">
+          {%- for item in tools -%}
+            {%- assign prod = item -%}
+            {%- if prod == blank or prod.title == blank -%}
+              {%- assign handle_str = item.handle | default: item -%}
+              {%- assign prod = all_products[handle_str] -%}
+              {%- if prod == blank or prod.title == blank -%}
+                {%- if handle_str contains 'pathways' or handle_str contains 'application-kit' -%}
+                  {%- assign prod = all_products['pathways-to-teach-canada-application-kit'] | default: all_products['the-pathways-to-teach-canada-application-kit'] | default: all_products['pathways-to-teach-canada'] -%}
+                {%- elsif handle_str contains 'province-picker' -%}
+                  {%- assign prod = all_products['canada-province-picker'] | default: all_products['the-canada-province-picker'] | default: all_products['canada-province-picker-find-your-best-fit-province'] | default: all_products['the-canada-province-picker-find-your-best-fit-province'] -%}
+                {%- elsif handle_str contains 'certification-guide' -%}
+                  {%- assign prod = all_products['canada-teaching-certification-guide'] | default: all_products['the-canada-teaching-certification-guide'] | default: all_products['canada-teaching-certification-guide-interactive'] | default: all_products['the-canada-teaching-certification-guide-interactive'] -%}
+                {%- endif -%}
+              {%- endif -%}
+            {%- endif -%}
+            {%- if prod != blank and prod.title != blank -%}
+              {%- render 'product-card-item', product: prod -%}
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+    <!-- 3. COACHING CATEGORY -->
+    {%- assign coaching_count = 0 -%}
+    {%- for item in coaching -%}
+      {%- assign prod = item -%}
+      {%- if prod == blank or prod.title == blank -%}
+        {%- assign handle_str = item.handle | default: item -%}
+        {%- assign prod = all_products[handle_str] -%}
+      {%- endif -%}
+      {%- if prod != blank and prod.title != blank -%}
+        {%- assign coaching_count = coaching_count | plus: 1 -%}
+      {%- endif -%}
+    {%- endfor -%}
+
+    {%- if coaching_count > 0 -%}
+      <div style="margin-bottom: 80px;">
+        <div style="margin-bottom: 32px; border-bottom: 2px solid #e5e7eb; padding-bottom: 16px;">
+          <h2 class="font-display font-black" style="font-size: 2.25rem; margin: 0; color: var(--text-light);">
+            {{ section.settings.coaching_title }}
+          </h2>
+          <p style="color: #64748b; margin: 8px 0 0 0; font-size: 1rem;">
+            {{ section.settings.coaching_desc }}
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 grid-cols-2" style="gap: 40px;">
+          {%- for item in coaching -%}
+            {%- assign prod = item -%}
+            {%- if prod == blank or prod.title == blank -%}
+              {%- assign handle_str = item.handle | default: item -%}
+              {%- assign prod = all_products[handle_str] -%}
+            {%- endif -%}
+            {%- if prod != blank and prod.title != blank -%}
+              {%- render 'product-card-item', product: prod, is_coaching: true -%}
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+    <!-- 4. FREE RESOURCES CATEGORY -->
+    <div style="margin-bottom: 40px;">
+      <div style="margin-bottom: 32px; border-bottom: 2px solid #e5e7eb; padding-bottom: 16px;">
+        <h2 class="font-display font-black" style="font-size: 2.25rem; margin: 0; color: var(--text-light);">
+          {{ section.settings.free_title }}
+        </h2>
+        <p style="color: #64748b; margin: 8px 0 0 0; font-size: 1rem;">
+          {{ section.settings.free_desc }}
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 grid-cols-2" style="gap: 40px;">
+        {%- if section.blocks.size > 0 -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'free_resource' -%}
+              <a href="#" class="product-toolkit-card js-resource-card group" data-resource-title="{{ block.settings.title | escape }}" data-resource-tag="{{ block.settings.tag | default: 'lead-magnet' }}" style="display: flex; flex-direction: column; background-color: #fafafc; border: 1px solid #e5e7eb; border-radius: var(--border-radius-lg); padding: 40px; transition: var(--transition-smooth); height: 100%;" {{ block.shopify_attributes }}>
+                
+                {%- if block.settings.thumbnail != blank -%}
+                  <!-- Thumbnail Image Container with Contain and Padding (Matches paid cards) -->
+                  <div class="product-toolkit-image-wrapper" style="position: relative; width: 100%; aspect-ratio: 4/3; border-radius: var(--border-radius-md); overflow: hidden; margin-bottom: 32px; border: 1px solid #e5e7eb; background-color: rgba(243, 244, 246, 0.5); flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+                    <img src="{{ block.settings.thumbnail | image_url: width: 800 }}" 
+                         alt="{{ block.settings.title | escape }}" 
+                         style="width: 100%; height: 100%; object-fit: contain; padding: 24px; transition: var(--transition-smooth);"
+                         class="product-toolkit-img"
+                         loading="lazy">
+                  </div>
+                {%- else -%}
+                  <!-- Small File Icon Fallback (matches Next.js w-16 h-16 circular icon) -->
+                  <div class="product-toolkit-fallback-icon" style="width: 64px; height: 64px; background-color: rgba(28, 145, 215, 0.08); display: flex; align-items: center; justify-content: center; border-radius: 50%; color: var(--color-blue); margin-bottom: 32px; flex-shrink: 0; transition: var(--transition-smooth);">
+                    <svg style="width: 32px; height: 32px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                  </div>
+                {%- endif -%}
+
+                <h3 class="font-display font-bold product-toolkit-title" style="font-size: 1.875rem; line-height: 1.3; color: var(--text-light); margin-top: 0; margin-bottom: 24px; transition: var(--transition-smooth); flex-grow: 1;">
+                  {{ block.settings.title }}
+                </h3>
+                
+                <div class="flex items-center justify-between" style="border-top: 1px solid #e5e7eb; padding-top: 32px; margin-top: auto; width: 100%;">
+                  <span style="font-size: 1.5rem; font-weight: 700; color: var(--color-blue);">
+                    Free
+                  </span>
+                  <span class="product-toolkit-btn" style="background-color: var(--color-blue); color: #ffffff; padding: 12px 24px; border-radius: var(--border-radius-full); font-weight: 700; transition: var(--transition-smooth);">
+                    Download
+                  </span>
+                </div>
+              </a>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- else -%}
+          <!-- Default static fallbacks -->
+          <a href="#" class="product-toolkit-card js-resource-card group" data-resource-title="Qatar Document Attestation Checklist" data-resource-tag="lead Magnet: Qatar Document checklist" style="display: flex; flex-direction: column; background-color: #fafafc; border: 1px solid #e5e7eb; border-radius: var(--border-radius-lg); padding: 40px; transition: var(--transition-smooth); height: 100%;">
+            <div class="product-toolkit-fallback-icon" style="width: 64px; height: 64px; background-color: rgba(28, 145, 215, 0.08); display: flex; align-items: center; justify-content: center; border-radius: 50%; color: var(--color-blue); margin-bottom: 32px; flex-shrink: 0; transition: var(--transition-smooth);">
+              <svg style="width: 32px; height: 32px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+              </svg>
+            </div>
+            <h3 class="font-display font-bold product-toolkit-title" style="font-size: 1.875rem; line-height: 1.3; color: var(--text-light); margin-top: 0; margin-bottom: 24px; transition: var(--transition-smooth); flex-grow: 1;">
+              Qatar Document Attestation Checklist
+            </h3>
+            <div class="flex items-center justify-between" style="border-top: 1px solid #e5e7eb; padding-top: 32px; margin-top: auto; width: 100%;">
+              <span style="font-size: 1.5rem; font-weight: 700; color: var(--color-blue);">
+                Free
+              </span>
+              <span class="product-toolkit-btn" style="background-color: var(--color-blue); color: #ffffff; padding: 12px 24px; border-radius: var(--border-radius-full); font-weight: 700; transition: var(--transition-smooth);">
+                Download
+              </span>
+            </div>
+          </a>
+
+          <a href="#" class="product-toolkit-card js-resource-card group" data-resource-title="Qatar Teacher Immigration Checklist" data-resource-tag="Lead magnet: Qatar Immigration Checklist" style="display: flex; flex-direction: column; background-color: #fafafc; border: 1px solid #e5e7eb; border-radius: var(--border-radius-lg); padding: 40px; transition: var(--transition-smooth); height: 100%;">
+            <div class="product-toolkit-fallback-icon" style="width: 64px; height: 64px; background-color: rgba(28, 145, 215, 0.08); display: flex; align-items: center; justify-content: center; border-radius: 50%; color: var(--color-blue); margin-bottom: 32px; flex-shrink: 0; transition: var(--transition-smooth);">
+              <svg style="width: 32px; height: 32px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+              </svg>
+            </div>
+            <h3 class="font-display font-bold product-toolkit-title" style="font-size: 1.875rem; line-height: 1.3; color: var(--text-light); margin-top: 0; margin-bottom: 24px; transition: var(--transition-smooth); flex-grow: 1;">
+              Qatar Teacher Immigration Checklist
+            </h3>
+            <div class="flex items-center justify-between" style="border-top: 1px solid #e5e7eb; padding-top: 32px; margin-top: auto; width: 100%;">
+              <span style="font-size: 1.5rem; font-weight: 700; color: var(--color-blue);">
+                Free
+              </span>
+              <span class="product-toolkit-btn" style="background-color: var(--color-blue); color: #ffffff; padding: 12px 24px; border-radius: var(--border-radius-full); font-weight: 700; transition: var(--transition-smooth);">
+                Download
+              </span>
+            </div>
+          </a>
+
+          <a href="#" class="product-toolkit-card js-resource-card group" data-resource-title="Guide to Reputable British & American Schools in Qatar" data-resource-tag="lead magnet qatar schools" style="display: flex; flex-direction: column; background-color: #fafafc; border: 1px solid #e5e7eb; border-radius: var(--border-radius-lg); padding: 40px; transition: var(--transition-smooth); height: 100%;">
+            <div class="product-toolkit-fallback-icon" style="width: 64px; height: 64px; background-color: rgba(28, 145, 215, 0.08); display: flex; align-items: center; justify-content: center; border-radius: 50%; color: var(--color-blue); margin-bottom: 32px; flex-shrink: 0; transition: var(--transition-smooth);">
+              <svg style="width: 32px; height: 32px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+              </svg>
+            </div>
+            <h3 class="font-display font-bold product-toolkit-title" style="font-size: 1.875rem; line-height: 1.3; color: var(--text-light); margin-top: 0; margin-bottom: 24px; transition: var(--transition-smooth); flex-grow: 1;">
+              Guide to Reputable British & American Schools in Qatar
+            </h3>
+            <div class="flex items-center justify-between" style="border-top: 1px solid #e5e7eb; padding-top: 32px; margin-top: auto; width: 100%;">
+              <span style="font-size: 1.5rem; font-weight: 700; color: var(--color-blue);">
+                Free
+              </span>
+              <span class="product-toolkit-btn" style="background-color: var(--color-blue); color: #ffffff; padding: 12px 24px; border-radius: var(--border-radius-full); font-weight: 700; transition: var(--transition-smooth);">
+                Download
+              </span>
+            </div>
+          </a>
+
+          <a href="#" class="product-toolkit-card js-resource-card group" data-resource-title="Canada Teacher Province Shortlist" data-resource-tag="Lead magnet: Canada Teacher Province shortlist" style="display: flex; flex-direction: column; background-color: #fafafc; border: 1px solid #e5e7eb; border-radius: var(--border-radius-lg); padding: 40px; transition: var(--transition-smooth); height: 100%;">
+            <div class="product-toolkit-fallback-icon" style="width: 64px; height: 64px; background-color: rgba(28, 145, 215, 0.08); display: flex; align-items: center; justify-content: center; border-radius: 50%; color: var(--color-blue); margin-bottom: 32px; flex-shrink: 0; transition: var(--transition-smooth);">
+              <svg style="width: 32px; height: 32px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+              </svg>
+            </div>
+            <h3 class="font-display font-bold product-toolkit-title" style="font-size: 1.875rem; line-height: 1.3; color: var(--text-light); margin-top: 0; margin-bottom: 24px; transition: var(--transition-smooth); flex-grow: 1;">
+              Canada Teacher Province Shortlist
+            </h3>
+            <div class="flex items-center justify-between" style="border-top: 1px solid #e5e7eb; padding-top: 32px; margin-top: auto; width: 100%;">
+              <span style="font-size: 1.5rem; font-weight: 700; color: var(--color-blue);">
+                Free
+              </span>
+              <span class="product-toolkit-btn" style="background-color: var(--color-blue); color: #ffffff; padding: 12px 24px; border-radius: var(--border-radius-full); font-weight: 700; transition: var(--transition-smooth);">
+                Download
+              </span>
+            </div>
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{%- endpaginate -%}
+
+<!-- Custom CSS for toolkit cards -->
+<style>
+  .product-toolkit-card:hover {
+    border-color: var(--color-blue);
+    box-shadow: var(--shadow-xl);
+  }
+  .product-toolkit-card:hover .product-toolkit-img {
+    transform: scale(1.05);
+  }
+  .product-toolkit-card:hover .product-toolkit-fallback-icon {
+    transform: scale(1.08);
+    background-color: var(--color-blue);
+    color: #ffffff;
+  }
+  .product-toolkit-card:hover .product-toolkit-title {
+    color: var(--color-blue) !important;
+  }
+  .product-toolkit-card:hover .product-toolkit-btn {
+    background-color: var(--color-brand-deep, #143D8A) !important;
+    color: #ffffff !important;
+  }
+
+  /* Lead Magnet Modal Styles */
+  .resource-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(10, 11, 20, 0.6);
+    backdrop-filter: blur(8px);
+    z-index: 99999;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .resource-modal-content {
+    background-color: #ffffff;
+    max-width: 500px;
+    width: 90%;
+    border-radius: 24px;
+    border: 1px solid #e2e8f0;
+    padding: 40px;
+    position: relative;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+    transform: scale(0.95);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    text-align: center;
+    color: #0a0b14;
+  }
+  .resource-modal-close:hover {
+    color: #0a0b14 !important;
+  }
+  #resource-submit-btn:hover {
+    background-color: var(--color-brand-deep, #143D8A) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(28, 145, 215, 0.35) !important;
+  }
+</style>
+
+<!-- Free Resource Modal -->
+<div id="resource-modal" class="resource-modal-overlay">
+  <div class="resource-modal-content">
+    
+    <!-- Close Button -->
+    <button type="button" class="resource-modal-close" style="position: absolute; top: 20px; right: 20px; background: none; border: none; font-size: 24px; cursor: pointer; color: #94a3b8; transition: color 0.2s;" onclick="closeResourceModal()">×</button>
+    
+    <!-- Icon in Modal -->
+    <div style="width: 56px; height: 56px; background-color: rgba(28, 145, 215, 0.08); display: flex; align-items: center; justify-content: center; border-radius: 50%; color: var(--color-blue, #1C91D7); margin: 0 auto 24px auto;">
+      <svg style="width: 28px; height: 28px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+      </svg>
+    </div>
+
+    <!-- Modal Headings -->
+    <h3 class="font-display font-black" id="resource-modal-title" style="font-size: 1.75rem; line-height: 1.2; margin: 0 0 12px 0; color: #0a0b14;">Download Free Resource</h3>
+    <p style="font-size: 0.95rem; color: #64748b; margin: 0 0 32px 0; line-height: 1.5;">
+      Enter your email address below to receive your free download straight to your inbox.
+    </p>
+
+    <!-- Subscription Form -->
+    {%- form 'customer', id: 'resource-subscription-form' -%}
+      <input type="hidden" name="contact[accepts_marketing]" value="true">
+      <input type="hidden" name="contact[tags]" id="resource-tags-input" value="newsletter, free-resource">
+      
+      <div style="margin-bottom: 16px; text-align: left;">
+        <label for="resource-name-input" style="display: block; font-size: 0.85rem; font-weight: 700; color: #475569; margin-bottom: 8px;">First Name</label>
+        <input type="text" name="contact[first_name]" id="resource-name-input" placeholder="Your name" required style="width: 100%; padding: 14px 20px; border-radius: 9999px; border: 1px solid #cbd5e1; font-size: 1rem; color: #0a0b14; outline: none; transition: border-color 0.2s;" onfocus="this.style.borderColor='var(--color-blue)'" onblur="this.style.borderColor='#cbd5e1'">
+      </div>
+
+      <div style="margin-bottom: 24px; text-align: left;">
+        <label for="resource-email-input" style="display: block; font-size: 0.85rem; font-weight: 700; color: #475569; margin-bottom: 8px;">Email Address</label>
+        <input type="email" name="contact[email]" id="resource-email-input" placeholder="you@example.com" required style="width: 100%; padding: 14px 20px; border-radius: 9999px; border: 1px solid #cbd5e1; font-size: 1rem; color: #0a0b14; outline: none; transition: border-color 0.2s;" onfocus="this.style.borderColor='var(--color-blue)'" onblur="this.style.borderColor='#cbd5e1'">
+      </div>
+
+      <button type="submit" id="resource-submit-btn" style="width: 100%; background-color: var(--color-blue, #1C91D7); color: #ffffff; border: none; padding: 16px 32px; border-radius: 9999px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 12px rgba(28, 145, 215, 0.2);">
+        Get Free Access
+      </button>
+    {%- endform -%}
+
+    <!-- Success Message Container (Hidden by default) -->
+    <div id="resource-success-message" style="display: none; text-align: center; padding: 20px 0;">
+      <div style="width: 56px; height: 56px; background-color: rgba(34, 197, 94, 0.08); display: flex; align-items: center; justify-content: center; border-radius: 50%; color: #22c55e; margin: 0 auto 24px auto;">
+        <svg style="width: 28px; height: 28px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+        </svg>
+      </div>
+      <h3 class="font-display font-black" style="font-size: 1.75rem; line-height: 1.2; margin: 0 0 12px 0; color: #0a0b14;">Sent Successfully!</h3>
+      <p style="font-size: 0.95rem; color: #64748b; line-height: 1.5; margin: 0;">
+        We have emailed the download link to <strong id="resource-success-email" style="color: #0a0b14;"></strong>. Please check your inbox (and spam folder) in a few minutes.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function openResourceModal(resourceTitle, resourceTag) {
+    var modal = document.getElementById('resource-modal');
+    var titleEl = document.getElementById('resource-modal-title');
+    var tagsInput = document.getElementById('resource-tags-input');
+    var form = document.getElementById('resource-subscription-form');
+    var successMsg = document.getElementById('resource-success-message');
+    
+    // Reset view
+    form.style.display = 'block';
+    successMsg.style.display = 'none';
+    
+    // Set dynamic content
+    titleEl.textContent = resourceTitle;
+    tagsInput.value = "newsletter, " + resourceTag;
+    
+    // Show modal
+    modal.style.display = 'flex';
+    setTimeout(function() {
+      modal.style.opacity = '1';
+      modal.querySelector('.resource-modal-content').style.transform = 'scale(1)';
+    }, 10);
+  }
+
+  function closeResourceModal() {
+    var modal = document.getElementById('resource-modal');
+    modal.style.opacity = '0';
+    modal.querySelector('.resource-modal-content').style.transform = 'scale(0.95)';
+    setTimeout(function() {
+      modal.style.display = 'none';
+    }, 300);
+  }
+
+  // Close when clicking outside content
+  window.addEventListener('click', function(event) {
+    var modal = document.getElementById('resource-modal');
+    if (event.target === modal) {
+      closeResourceModal();
+    }
+  });
+
+  // AJAX submission handler
+  document.addEventListener('DOMContentLoaded', function() {
+    var cards = document.querySelectorAll('.js-resource-card');
+    cards.forEach(function(card) {
+      card.addEventListener('click', function(e) {
+        e.preventDefault();
+        var title = this.getAttribute('data-resource-title');
+        var tag = this.getAttribute('data-resource-tag') || 'newsletter';
+        openResourceModal(title, tag);
+      });
+    });
+
+    var form = document.getElementById('resource-subscription-form');
+    if (form) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var submitBtn = document.getElementById('resource-submit-btn');
+        var nameInput = document.getElementById('resource-name-input');
+        var emailInput = document.getElementById('resource-email-input');
+        var emailValue = emailInput.value;
+        
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Processing...';
+        
+        var formData = new FormData(form);
+        
+        fetch('/contact', {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'text/html'
+          }
+        })
+        .then(function(response) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Get Free Access';
+          form.style.display = 'none';
+          document.getElementById('resource-success-email').textContent = emailValue;
+          document.getElementById('resource-success-message').style.display = 'block';
+        })
+        .catch(function(error) {
+          console.error('Error submitting form:', error);
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Get Free Access';
+          form.submit();
+        });
+      });
+    }
+  });
+</script>
+
+
+{% schema %}
+{
+  "name": "Collection Grid",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Background Image"
+    },
+    {
+      "type": "text",
+      "id": "hero_title_prefix",
+      "label": "Hero Title Prefix",
+      "default": "Empower your"
+    },
+    {
+      "type": "text",
+      "id": "hero_title_italic",
+      "label": "Hero Title Italic",
+      "default": "transition."
+    },
+    {
+      "type": "textarea",
+      "id": "hero_description",
+      "label": "Hero Subtitle",
+      "default": "Premium intelligence, datasets, and decision tools."
+    },
+    {
+      "type": "header",
+      "content": "Guides Section"
+    },
+    {
+      "type": "text",
+      "id": "guides_title",
+      "label": "Guides Section Title",
+      "default": "Guides"
+    },
+    {
+      "type": "text",
+      "id": "guides_desc",
+      "label": "Guides Description",
+      "default": "Premium handbooks and reports compiled from 18 years of global education market experience."
+    },
+    {
+      "type": "product_list",
+      "id": "guides_products",
+      "label": "Select Guides",
+      "limit": 12
+    },
+    {
+      "type": "header",
+      "content": "Interactive Tools Section"
+    },
+    {
+      "type": "text",
+      "id": "tools_title",
+      "label": "Tools Section Title",
+      "default": "Interactive Tools"
+    },
+    {
+      "type": "text",
+      "id": "tools_desc",
+      "label": "Tools Description",
+      "default": "Custom spreadsheets, comparison matrices, and goal-setting planners built specifically for educators."
+    },
+    {
+      "type": "product_list",
+      "id": "tools_products",
+      "label": "Select Tools",
+      "limit": 12
+    },
+    {
+      "type": "header",
+      "content": "Coaching Section"
+    },
+    {
+      "type": "text",
+      "id": "coaching_title",
+      "label": "Coaching Section Title",
+      "default": "1-on-1 Coaching"
+    },
+    {
+      "type": "text",
+      "id": "coaching_desc",
+      "label": "Coaching Description",
+      "default": "Direct, personalized strategy sessions to review contracts, optimize CVs, and negotiate exactly what you're worth."
+    },
+    {
+      "type": "product_list",
+      "id": "coaching_products",
+      "label": "Select Coaching Products",
+      "limit": 12
+    },
+    {
+      "type": "header",
+      "content": "Free Resources Section"
+    },
+    {
+      "type": "text",
+      "id": "free_title",
+      "label": "Free Resources Section Title",
+      "default": "Free Resources"
+    },
+    {
+      "type": "text",
+      "id": "free_desc",
+      "label": "Free Resources Description",
+      "default": "Checklists and guides to navigate attestation, immigration requirements, and school selections."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "free_resource",
+      "name": "Free Resource Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Resource Title",
+          "default": "Qatar Document Attestation Checklist"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Download Link"
+        },
+        {
+          "type": "image_picker",
+          "id": "thumbnail",
+          "label": "Resource Thumbnail"
+        },
+        {
+          "type": "text",
+          "id": "tag",
+          "label": "Klaviyo/Shopify Tag",
+          "default": "lead Magnet: Qatar Document checklist"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

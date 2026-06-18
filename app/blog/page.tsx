@@ -67,20 +67,21 @@ export default function BlogList() {
 
       {/* Content */}
       <section className="py-24">
-        <div className="container mx-auto px-6 md:px-12 flex flex-col lg:flex-row gap-12">
-          
-          <div className="w-full lg:w-2/3 flex flex-col gap-10">
+        <div className="container mx-auto px-6 md:px-12 max-w-6xl">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {posts.map((post, i) => (
               <ScrollReveal key={i} delay={i * 0.1}>
-                 <Link href={post.slug !== "#" ? `/blog/${post.slug}` : "/blog"} className="group flex flex-col md:flex-row bg-gray-50 dark:bg-[#121324] border border-gray-200 dark:border-gray-800 rounded-2xl overflow-hidden hover:shadow-xl transition-shadow block">
-                   <div className="md:w-2/5 h-64 md:h-auto relative overflow-hidden">
+                 <Link href={post.slug !== "#" ? `/blog/${post.slug}` : "/blog"} className="group flex flex-col bg-gray-50 dark:bg-[#121324] border border-gray-200 dark:border-gray-800 rounded-3xl overflow-hidden hover:shadow-xl transition-all h-full">
+                   <div className="relative h-48 w-full overflow-hidden bg-gray-100 dark:bg-gray-800">
                      <Image src={post.image} alt={post.title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
                    </div>
-                   <div className="p-8 flex flex-col justify-center flex-1">
-                     <div className="inline-block bg-brand-blue/10 text-brand-blue px-3 py-1 rounded-full text-xs font-bold mb-4 uppercase tracking-wider w-fit">{post.category}</div>
-                     <h2 className="font-display font-bold text-2xl mb-4 text-gray-900 dark:text-white group-hover:text-brand-blue transition-colors line-clamp-2">{post.title}</h2>
-                     <p className="text-gray-600 dark:text-gray-400 mb-6 line-clamp-3">{post.excerpt}</p>
-                     <div className="flex items-center text-sm text-gray-500 font-medium mt-auto">
+                   <div className="p-6 flex flex-col flex-1 justify-between">
+                     <div>
+                       <span className="inline-block bg-brand-blue/10 text-brand-blue px-3 py-1 rounded-full text-xs font-bold mb-3 uppercase tracking-wider">{post.category}</span>
+                       <h2 className="font-display font-bold text-xl mb-3 text-gray-900 dark:text-white group-hover:text-brand-blue transition-colors line-clamp-2">{post.title}</h2>
+                       <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-3 leading-relaxed">{post.excerpt}</p>
+                     </div>
+                     <div className="flex items-center text-xs text-gray-500 font-medium mt-4 pt-4 border-t border-gray-100 dark:border-gray-800">
                        <span>{post.author}</span>
                        <span className="mx-2">•</span>
                        <span>{post.readTime} read</span>
@@ -90,27 +91,6 @@ export default function BlogList() {
               </ScrollReveal>
             ))}
           </div>
-
-          <aside className="w-full lg:w-1/3 space-y-10">
-            <ScrollReveal>
-              <div className="bg-gray-50 dark:bg-[#121324] border border-gray-200 dark:border-gray-800 rounded-2xl p-8 sticky top-32">
-                <h3 className="font-display font-bold text-xl mb-6 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-4">Categories</h3>
-                <ul className="space-y-4">
-                  {["Qatar", "UAE", "Contracts", "Recruitment", "Interviews"].map((cat, idx) => (
-                    <li key={cat}>
-                      <a href="#" className="flex justify-between items-center group text-gray-600 dark:text-gray-400 hover:text-brand-blue dark:hover:text-brand-blue transition-colors">
-                        <span className="font-medium">{cat}</span>
-                        <span className="bg-gray-200 dark:bg-gray-800 text-gray-600 dark:text-gray-400 text-xs px-2 py-1 rounded-full group-hover:bg-brand-blue/10 group-hover:text-brand-blue transition-colors">
-                          {idx === 0 ? 8 : Math.floor(Math.random() * 5) + 1}
-                        </span>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </ScrollReveal>
-          </aside>
-          
         </div>
       </section>
     </div>

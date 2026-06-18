@@ -60,11 +60,8 @@ export default function BlogContent() {
       </section>
 
       {/* SECTION 2 — MAIN CONTENT AREA */}
-      <section className="py-[80px] px-6 md:px-12 max-w-[1100px] mx-auto w-full">
-        <div className="flex flex-col lg:flex-row gap-[64px]">
-          
-          {/* LEFT COLUMN — Article body */}
-          <div className="w-full lg:max-w-[720px] flex-shrink-0">
+      <section className="py-[80px] px-6 md:px-12 max-w-4xl mx-auto w-full">
+        <div className="max-w-[720px] mx-auto">
              
              {/* INTRO PULL QUOTE */}
              <motion.blockquote
@@ -242,7 +239,7 @@ export default function BlogContent() {
                <div className="flex-shrink-0">
                   <div className="relative w-[64px] h-[64px] rounded-full overflow-hidden bg-brand-blue flex items-center justify-center">
                     <span className="text-white font-bold absolute z-0 text-lg">ES</span>
-                    <Image src="/images/Edwina_headshot.png" alt="Edwina Shangase" fill className="object-cover object-top relative z-10" />
+                    <Image src="/images/Edwina_headshot_new.png" alt="Edwina Shangase" fill className="object-cover object-top relative z-10" />
                   </div>
                </div>
                <div>
@@ -254,78 +251,49 @@ export default function BlogContent() {
                </div>
              </motion.div>
 
-          </div>
+             <hr className="border-t border-[rgba(0,0,0,0.08)] dark:border-[rgba(255,255,255,0.08)] my-12" />
 
-          {/* RIGHT COLUMN — Sidebar */}
-          <div className="w-full lg:w-[300px] flex-shrink-0 relative">
-             <div className="sticky top-[100px] space-y-[24px]">
-                
-                {/* Widget 1 — About Edwina */}
-                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ delay: 0.1 }} className="bg-white dark:bg-[#13151f] border border-[rgba(0,0,0,0.08)] dark:border-[rgba(255,255,255,0.08)] rounded-[16px] p-[24px]">
-                  <div className="relative w-[80px] h-[80px] rounded-full overflow-hidden mb-4">
-                    <Image src="/images/Edwina_headshot.png" alt="Edwina Shangase" fill className="object-cover object-top" />
-                  </div>
-                  <div className="font-display font-bold text-[16px] text-gray-900 dark:text-white">Edwina Shangase</div>
-                  <div className="text-gray-500 dark:text-gray-400 text-[12px] font-body mb-[10px]">Founder · 18 years international teaching</div>
-                  <p className="text-gray-500 dark:text-gray-400 text-[13px] font-body mb-[16px] leading-relaxed">
-                    South African teacher who has lived and worked in the UK, Qatar, and Canada.
+             {/* RELATED RESOURCES & NEWSLETTER GRIDS */}
+             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Free Qatar Guides Card */}
+                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} className="bg-gray-50 dark:bg-[#121324] border border-gray-200 dark:border-gray-800 rounded-3xl p-6 md:p-8 shadow-sm">
+                  <h4 className="font-display font-bold text-lg text-gray-900 dark:text-white mb-3">Free Qatar Guides</h4>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm mb-5 leading-relaxed">
+                    Download step-by-step checklists to make your relocation process hassle-free.
                   </p>
-                  <a href="/about" className="text-brand-blue text-[13px] font-medium hover:underline flex items-center">
-                    Read my story <span className="ml-1">→</span>
-                  </a>
-                </motion.div>
-
-                {/* Widget 2 — Free Resources */}
-                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ delay: 0.2 }} className="bg-white dark:bg-[#13151f] border border-[rgba(0,0,0,0.08)] dark:border-[rgba(255,255,255,0.08)] rounded-[16px] p-[24px]">
-                  <div className="font-display font-bold text-[16px] text-gray-900 dark:text-white mb-[14px]">Free Qatar guides</div>
-                  <div className="space-y-4">
-                    <a href="https://drive.google.com/file/d/1ugj0TeUoQ7Z6zT8QaW6QcQdu5Y4l99xJ/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="flex items-start gap-[8px] group">
-                      <span className="bg-[#E1F5EE] text-[#0F6E56] text-[10px] font-bold px-[8px] py-[2px] rounded-full flex-shrink-0 mt-0.5">Free</span>
-                      <span className="text-brand-blue text-[13px] font-medium group-hover:underline leading-snug">Qatar Documentation Checklist</span>
+                  <div className="space-y-3">
+                    <a href="https://drive.google.com/file/d/1ugj0TeUoQ7Z6zT8QaW6QcQdu5Y4l99xJ/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-brand-blue hover:underline text-sm font-medium">
+                      <span className="bg-[#E1F5EE] text-[#0F6E56] text-[10px] font-bold px-2 py-0.5 rounded-full flex-shrink-0">Free</span>
+                      Qatar Documentation Checklist
                     </a>
-                    <a href="https://drive.google.com/file/d/1UMgNsJjvVQzCXEMbJAYksE3BGLnTU_z8/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="flex items-start gap-[8px] group">
-                      <span className="bg-[#E1F5EE] text-[#0F6E56] text-[10px] font-bold px-[8px] py-[2px] rounded-full flex-shrink-0 mt-0.5">Free</span>
-                      <span className="text-brand-blue text-[13px] font-medium group-hover:underline leading-snug">Qatar Immigration Checklist</span>
+                    <a href="https://drive.google.com/file/d/1UMgNsJjvVQzCXEMbJAYksE3BGLnTU_z8/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-brand-blue hover:underline text-sm font-medium">
+                      <span className="bg-[#E1F5EE] text-[#0F6E56] text-[10px] font-bold px-2 py-0.5 rounded-full flex-shrink-0">Free</span>
+                      Qatar Immigration Checklist
                     </a>
                   </div>
                 </motion.div>
 
-                {/* Widget 3 — Email Signup */}
-                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ delay: 0.3 }} className="bg-brand-deep rounded-[16px] p-[24px]">
-                  <div className="font-display font-bold text-[16px] text-white">Get more guides</div>
-                  <div className="text-white/65 text-[13px] font-body mb-[16px] mt-1">Relocation intel straight to your inbox.</div>
+                {/* Email Capture Card */}
+                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ delay: 0.1 }} className="bg-brand-deep rounded-3xl p-6 md:p-8 shadow-sm flex flex-col justify-between text-white">
+                  <div>
+                    <h4 className="font-display font-bold text-lg text-white mb-2">Get More Relocation Intel</h4>
+                    <p className="text-white/70 text-sm font-body mb-5 leading-relaxed">
+                      Relocation guides and international teaching tips straight to your inbox.
+                    </p>
+                  </div>
                   <form onSubmit={(e) => e.preventDefault()} className="flex flex-col gap-3">
                     <input 
                       type="email" 
                       placeholder="Email address" 
                       required 
-                      className="w-full bg-white/12 text-white placeholder:text-white/40 border border-transparent focus:border-white/30 rounded-[8px] p-[10px_14px] text-[13px] outline-none" 
+                      className="w-full bg-white/12 text-white placeholder:text-white/40 border border-transparent focus:border-white/30 rounded-xl p-3 text-xs outline-none" 
                     />
-                    <button type="submit" className="w-full bg-[#FCCB52] text-[#3739DB] font-bold rounded-[8px] p-[10px] text-[13px] hover:bg-yellow-400 transition-colors">
+                    <button type="submit" className="w-full bg-[#FCCB52] text-[#3739DB] font-bold rounded-xl p-3 text-xs hover:bg-yellow-400 transition-colors">
                       Subscribe
                     </button>
                   </form>
                 </motion.div>
-
-                {/* Widget 4 — Categories */}
-                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ delay: 0.4 }} className="bg-white dark:bg-[#13151f] border border-[rgba(0,0,0,0.08)] dark:border-[rgba(255,255,255,0.08)] rounded-[16px] p-[24px]">
-                  <div className="font-display font-bold text-[16px] text-gray-900 dark:text-white mb-[16px]">Categories</div>
-                  <ul className="space-y-[12px] font-body text-[13px]">
-                    <li className="flex justify-between border-b border-[rgba(0,0,0,0.05)] dark:border-[rgba(255,255,255,0.05)] pb-[12px] last:border-0 last:pb-0">
-                       <a href="#" className="text-brand-blue font-medium hover:underline">Qatar</a>
-                       <span className="text-gray-400 font-bold text-[11px] bg-gray-100 dark:bg-[#1a1b26] px-2 py-0.5 rounded-full">(1)</span>
-                    </li>
-                    {["Canada", "Career", "Immigration", "Finance"].map((cat, i) => (
-                      <li key={i} className="flex justify-between border-b border-[rgba(0,0,0,0.05)] dark:border-[rgba(255,255,255,0.05)] pb-[12px] last:border-0 last:pb-0">
-                         <span className="text-gray-400 dark:text-gray-500">{cat}</span>
-                         <span className="text-gray-400/50 dark:text-gray-600 text-[11px]">soon</span>
-                      </li>
-                    ))}
-                  </ul>
-                </motion.div>
-
              </div>
-          </div>
 
         </div>
       </section>

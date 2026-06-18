@@ -50,11 +50,8 @@ export default function BlogContent() {
       </section>
 
       {/* SECTION 2 — MAIN CONTENT AREA */}
-      <section className="py-[80px] px-6 md:px-12 max-w-[1100px] mx-auto w-full">
-        <div className="flex flex-col lg:flex-row gap-[64px]">
-          
-          {/* LEFT COLUMN — Article body */}
-          <div className="w-full lg:max-w-[720px] flex-shrink-0">
+      <section className="py-[80px] px-6 md:px-12 max-w-4xl mx-auto w-full">
+        <div className="max-w-[720px] mx-auto">
              
              {/* INTRO PULL QUOTE */}
              <motion.blockquote
@@ -183,7 +180,7 @@ export default function BlogContent() {
                <div className="flex-shrink-0">
                   <div className="relative w-[64px] h-[64px] rounded-full overflow-hidden bg-brand-blue flex items-center justify-center">
                     <span className="text-white font-bold absolute z-0 text-lg">ES</span>
-                    <Image src="/images/Edwina_headshot.png" alt="Edwina Shangase" fill className="object-cover object-top relative z-10" />
+                    <Image src="/images/Edwina_headshot_new.png" alt="Edwina Shangase" fill className="object-cover object-top relative z-10" />
                   </div>
                </div>
                <div>
@@ -195,65 +192,48 @@ export default function BlogContent() {
                </div>
              </motion.div>
 
-          </div>
+             <hr className="border-t border-[rgba(0,0,0,0.08)] dark:border-[rgba(255,255,255,0.08)] my-12" />
 
-          {/* RIGHT COLUMN — Sidebar */}
-          <div className="w-full lg:w-[300px] flex-shrink-0 relative">
-             <div className="sticky top-[100px] space-y-[24px]">
-                
-                {/* Widget 1 — Hub Entry */}
-                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ delay: 0.1 }} className="bg-white dark:bg-[#13151f] border-2 border-brand-gold rounded-[16px] p-[24px] shadow-sm relative overflow-hidden group hover:border-[#FACC15] transition-colors">
-                  <div className="flex items-center gap-3 mb-4 relative z-10">
-                     <span className="text-3xl">🇨🇦</span>
-                     <h3 className="font-display font-bold text-gray-900 dark:text-white text-lg">Canada Hub</h3>
+             {/* RELATED RESOURCES & NEWSLETTER GRIDS */}
+             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Canada Hub Entry Card */}
+                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} className="bg-white dark:bg-[#13151f] border-2 border-brand-gold rounded-3xl p-6 md:p-8 shadow-sm relative overflow-hidden group hover:border-[#FACC15] transition-colors flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center gap-3 mb-3 relative z-10">
+                       <span className="text-3xl">🇨🇦</span>
+                       <h4 className="font-display font-bold text-gray-900 dark:text-white text-lg">Canada Hub</h4>
+                    </div>
+                    <p className="text-gray-500 dark:text-gray-400 text-sm font-body mb-5 leading-relaxed relative z-10">
+                      Get access to the step-by-step Canada pathway, including provincial guides, certification checklists, and immigration timelines.
+                    </p>
                   </div>
-                  <p className="text-gray-500 dark:text-gray-400 text-[13px] font-body mb-5 leading-relaxed relative z-10">
-                    Get access to the step-by-step Canada pathway, including provincial guides, certification checklists, and immigration timelines.
-                  </p>
-                  <a href="/hub/canada" className="relative z-10 block text-center w-full bg-brand-deep hover:bg-brand-blue text-white font-bold py-2.5 rounded-lg text-sm transition-colors shadow-sm">
+                  <a href="/hub/canada" className="relative z-10 block text-center w-full bg-brand-deep hover:bg-brand-blue text-white font-bold py-3 rounded-xl text-sm transition-all shadow-sm">
                     Enter the Hub
                   </a>
                   <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-brand-gold rounded-full opacity-[0.15] blur-2xl group-hover:bg-[#FACC15] transition-colors"></div>
                 </motion.div>
-                
-                {/* Widget 2 — About Edwina */}
-                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ delay: 0.2 }} className="bg-white dark:bg-[#13151f] border border-[rgba(0,0,0,0.08)] dark:border-[rgba(255,255,255,0.08)] rounded-[16px] p-[24px]">
-                  <div className="relative w-[80px] h-[80px] rounded-full overflow-hidden mb-4">
-                    <Image src="/images/Edwina_headshot.png" alt="Edwina Shangase" fill className="object-cover object-top" />
+
+                {/* Email Capture Card */}
+                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ delay: 0.1 }} className="bg-brand-deep rounded-3xl p-6 md:p-8 shadow-sm flex flex-col justify-between text-white">
+                  <div>
+                    <h4 className="font-display font-bold text-lg text-white mb-2">Get More Relocation Intel</h4>
+                    <p className="text-white/70 text-sm font-body mb-5 leading-relaxed">
+                      Relocation guides and international teaching tips straight to your inbox.
+                    </p>
                   </div>
-                  <div className="font-display font-bold text-[16px] text-gray-900 dark:text-white">Edwina Shangase</div>
-                  <div className="text-gray-500 dark:text-gray-400 text-[12px] font-body mb-[10px]">Founder · 18 years international teaching</div>
-                  <p className="text-gray-500 dark:text-gray-400 text-[13px] font-body mb-[16px] leading-relaxed">
-                    South African teacher who has lived and worked in the UK, Qatar, and Canada.
-                  </p>
-                  <a href="/about" className="text-brand-blue text-[13px] font-medium hover:underline flex items-center">
-                    Read my story <span className="ml-1">→</span>
-                  </a>
+                  <form onSubmit={(e) => e.preventDefault()} className="flex flex-col gap-3">
+                    <input 
+                      type="email" 
+                      placeholder="Email address" 
+                      required 
+                      className="w-full bg-white/12 text-white placeholder:text-white/40 border border-transparent focus:border-white/30 rounded-xl p-3 text-xs outline-none" 
+                    />
+                    <button type="submit" className="w-full bg-[#FCCB52] text-[#3739DB] font-bold rounded-xl p-3 text-xs hover:bg-yellow-400 transition-colors">
+                      Subscribe
+                    </button>
+                  </form>
                 </motion.div>
-
-                {/* Widget 3 — Categories */}
-                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ delay: 0.3 }} className="bg-white dark:bg-[#13151f] border border-[rgba(0,0,0,0.08)] dark:border-[rgba(255,255,255,0.08)] rounded-[16px] p-[24px]">
-                  <div className="font-display font-bold text-[16px] text-gray-900 dark:text-white mb-[16px]">Categories</div>
-                  <ul className="space-y-[12px] font-body text-[13px]">
-                    <li className="flex justify-between border-b border-[rgba(0,0,0,0.05)] dark:border-[rgba(255,255,255,0.05)] pb-[12px] last:border-0 last:pb-0">
-                       <a href="/hub/canada" className="text-brand-blue font-medium hover:underline">Canada</a>
-                       <span className="text-gray-400 font-bold text-[11px] bg-gray-100 dark:bg-[#1a1b26] px-2 py-0.5 rounded-full">(1)</span>
-                    </li>
-                    <li className="flex justify-between border-b border-[rgba(0,0,0,0.05)] dark:border-[rgba(255,255,255,0.05)] pb-[12px] last:border-0 last:pb-0">
-                       <a href="/hub/qatar" className="text-brand-blue font-medium hover:underline">Qatar</a>
-                       <span className="text-gray-400 font-bold text-[11px] bg-gray-100 dark:bg-[#1a1b26] px-2 py-0.5 rounded-full">(1)</span>
-                    </li>
-                    {["Career", "Immigration", "Finance"].map((cat, i) => (
-                      <li key={i} className="flex justify-between border-b border-[rgba(0,0,0,0.05)] dark:border-[rgba(255,255,255,0.05)] pb-[12px] last:border-0 last:pb-0">
-                         <span className="text-gray-400 dark:text-gray-500">{cat}</span>
-                         <span className="text-gray-400/50 dark:text-gray-600 text-[11px]">soon</span>
-                      </li>
-                    ))}
-                  </ul>
-                </motion.div>
-
              </div>
-          </div>
 
         </div>
       </section>
